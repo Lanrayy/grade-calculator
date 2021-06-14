@@ -133,6 +133,18 @@ function modules2(name, moduleCode, numofAssessments, average, credits){
 
 class assessment{
     constructor(name, yourScore, totalMarks, worth){
+        if(yourScore > totalMarks){
+            throw new Error("Your score is greater than the total marks");
+        }
+
+        if(yourScore < 0){
+            throw new Error("Invalid input. Score is less than zero");
+        }
+        
+        if(totalMarks < 0){
+            throw new Error("Invalid input. Total Marks is less than zero");
+        }
+
         this.name = name;
         this.score = yourScore;
         this.totalMarks = totalMarks;
@@ -143,7 +155,7 @@ class assessment{
 
     calcPercentage(yourScore, totalMarks){
         let percent = ((yourScore / totalMarks) * 100);
-        percent = Number(percent.toFixed(1));
+        percent = Number(percent.toFixed(2));
         return percent;
     }
 
@@ -164,18 +176,12 @@ class assessment{
 
 
 class modules{
-    // this.name = name;
-    // this.moduleCode = moduleCode;
-    // this.numOfAssessments = numofAssessments;
-    // this.average = average;
-    // this.credits = credits;
-    // this.assessments = {};
 
     constructor(name, moduleCode, numofAssessments, credits){
         this.name = name;
         this.moduleCode = moduleCode;
         this.numOfAssessments = numofAssessments;
-        this.average;
+        this.average = this.calcAverage;
         this.credits = credits;
         // an assessment object containing other objects;
         this.assessments = {};
@@ -190,9 +196,14 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
     };
 
     //adds a new assessment to the module
-
     addAssessment(name, yourScore, totalMarks, worth){
-        this.assessments[name] = new assessment(name, yourScore, totalMarks, worth);
+        try{
+            this.assessments[name] = new assessment(name, yourScore, totalMarks, worth);
+        }
+        catch(e){
+            console.log(`Error: ${e.message}!`);
+        }
+        
     }
 
     //calulates the number of assessments in the module
@@ -202,34 +213,129 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
         return keys.length;
     };
 
-    //calculates teh average score for the module
+    //calculates the average score for the module
     calcAverage(){
         let keys = Object.keys(this.assessments);
-        let length = keys.length
+        let length = keys.length;
+        console.log(`Length is ${length}`);
         let sum = 0;
         for(let i = 0; i < keys.length; i++){
-            sum += this.assessments[keys[i]];   
+            sum += this.assessments[`coursework_${i+1}`].percent;   
         }
+        console.log(`Sum is ${sum}`);
     
         let average = sum / length;
+        average = Number(average.toFixed(2));
         this.average = average;
         return average;
     };
 
-    //provides feedback for the module
-    feedback(){
-        let output;
-        let average = this.calcAverage();
-        if(average >= 70){
-            console.log(`Your score is ${average} and you currently have a first`);
-        } else if(average >= 60 && average < 70){
-            console.log(`Your score is ${average} and you currently have a 2.1`);
-        }else if(average >= 50 && average < 60){
-            console.log(`Your score is ${average} and you currently have a 2.2`);
-        }else if(average >= 40 && average < 50){
-            console.log(`Your score is ${average} and you and currently have a third`);
+    //returns the average grade for the module
+    static calcGrade(num){
+        if(num >= 70){
+            //console.log(`Your score is ${num} and you currently have a first`);
+            return " a first, ";
+        } else if(num >= 60 && num < 70){
+            //console.log(`Your score is ${num} and you currently have a 2.1`);
+            return " a 2.1, ";
+        }else if(num >= 50 && num < 60){
+            //console.log(`Your score is ${num} and you currently have a 2.2`);
+            return " a 2.2, ";
+        }else if(num >= 40 && num < 50){
+            //console.log(`Your score is ${num} and you and currently have a Pass`);
+            return " a pass, ";
         } else {
-            console.log(`Your score is ${average} and you have not passed yet`);
+            //console.log(`Your score is ${num} and you have not passed yet`);
+            return " ";
+        }
+    }
+
+
+    //this function lets the user know what marks the user has to get for each grade in the module.
+    //this method caluculates what the user needs to get for the final assessement for each grade.
+    getProjections(num){
+        let marksForAFirst = (140 - num).toFixed(2);
+        
+        if(marksForAFirst <= 0){
+            console.log("You have already achieved a first");
+        }else{
+            console.log(`You need to get at least ${marksForAFirst}%,${modules.calcGrade(marksForAFirst)}in the final assessment in order to get a first`);
+        }
+
+        let marksForATwoOne = (120 - num).toFixed(2);
+        if(marksForATwoOne <= 0){
+            console.log("You have already achieved a 2.1");
+        }else{
+            console.log(`You need to get at least ${marksForATwoOne}%,${modules.calcGrade(marksForATwoOne)}in the final assessment in order to get a 2.1`);
+        }
+
+        let marksForATwoTwo = (100 - num).toFixed(2);
+        if(marksForATwoTwo <= 0){
+            console.log("You have already achieved a 2.2");
+        }
+        else{
+            console.log(`You need to get at least ${marksForATwoTwo}%,${modules.calcGrade(marksForATwoTwo)}in the final assessment in order to get a 2.2`);
+        }
+        
+        let marksForAPass = (80 - num).toFixed(2);
+        if(marksForAPass <= 0){
+            console.log("You have already passed");
+        }
+        else{
+            console.log(`You need to get at least ${marksForAPass}%,${modules.calcGrade(marksForAPass)}in the final assessment in order to get a Pass`);
+        }
+        
+    }
+
+    //this method will provide complete feedback to the user about the module.
+    feedback(){
+        //if there are no assessments left.
+        //Log the user's final grade for the module.
+        if(this.numOfAssessments - this.calcNumOfAssessments() == 0){
+            console.log("No assessments left");
+
+            if(this.average >= 70){
+                console.log(`Your final mark is ${(this.average)}% and your final grade is a first`);
+            } else if(this.average >= 60 && this.average < 70){
+                console.log(`Your final mark is ${(this.average)}% and your final grade is a 2.1`);
+                
+            }else if(this.average >= 50 && this.average < 60){
+                console.log(`Your final mark is ${(this.average)}% and your final grade is a 2.2`);
+                
+            }else if(this.average >= 40 && this.average < 50){
+                console.log(`Your final mark is ${(this.average)}% and your final grade is a Pass`);
+            } else {
+                console.log(`Your final mark is ${(this.average)}% and you did not pass this module`);
+            }
+
+        }
+        //if there is only one assessment left.
+        else if(this.numOfAssessments - this.calcNumOfAssessments() == 1){
+            console.log("One assessment left");
+            //calculate average
+
+            //if average is first, tell user that they have already achieved a first.
+            if(this.average >= 70)
+            {
+                console.log(`Your score is ${this.average} and you currently have a first.`);
+                this.getProjections(this.average);
+            } 
+            // if they have a 2.1 tell them how much they need to get a first on the last assessement
+            else if(this.average >= 60 && this.average < 70)
+            {
+                console.log(`Your score is ${(this.average)} and you currently have a 2.1.`);
+                this.getProjections(this.average);
+            }else if(this.average >= 50 && this.average < 60){
+                console.log(`Your score is ${this.average} and you currently have a 2.2.`);
+                this.getProjections(this.average);
+            }else if(this.average >= 40 && this.average < 50){
+                console.log(`Your score is ${average} and you and currently have a third.`);
+                this.getProjections(this.average);
+            } else {
+                console.log(`Your score is ${this.average} and you have not passed yet.`);
+                this.getProjections(this.average);
+            }
+
         }
     }
 
@@ -251,16 +357,24 @@ console.log(databases.name);
 console.log(databases.assessments);
 
 
+databases.addAssessment("coursework_1", 5, 40, 30);
+databases.addAssessment("coursework_2", 30, 30, 30);
+databases.addAssessment("coursework_3", 29, 30, 30);
 
-
-databases.addAssessment("coursework_1", 37, 40, 30);
-databases.addAssessment("coursework_2", 29, 30, 30);
-databases.addAssessment("coursework_3", 20, 30, 30);
 console.log(databases.assessments);
 console.log(databases.credits);
 console.log(databases.assessments.coursework_3.score);
+console.log(databases.calcAverage());
+console.log(databases.average);
 
+console.log("Rest");
+databases.feedback();
+console.log("\n");
+
+console.log("details");
 databases.details();
+console.log("\n");
+// databases.calcGrade();
 
 // console.log(module.toString());
 // module.calcAverage();
