@@ -1,135 +1,8 @@
 'use strict'
 console.log("Hello");
 
-// let module = {
-//     name: "Databases",
-//     moduleCode: "COMP1121",
-//     numofAssessments: 4,
-//     assessments: {
-//         coursework_1: 100,
-//         coursework_2: 40,
-//         coursework_3: 40,
-//         coursework_4: 100,
-//     },
-//     average: 0,
-//     numOfCredits: 10,
-
-//     //methods
-
-//     //returns a string representation of the fields in the object
-//     toString: function(){
-//         console.log(`Databases ${this.moduleCode} is worth ${this.numOfCredits} credits and has ${this.calcNumOfAssessments()} asssessments`);
-//     },
-
-//     //adds a new assessment to the module
-//     addAssessment: function(name, grade){
-//         this.assessments[name] = grade;
-//         this.numofAssessments++;
-//     },
-
-//     //calulates the number of assessments in the module
-//     calcNumOfAssessments: function(){
-//         let keys = Object.keys(this.assessments);
-//         this.numofAssessments = keys.length;
-//         return keys.length;
-//     },
-
-//     //calculates teh average score for the module
-//     calcAverage: function(){
-//         let keys = Object.keys(this.assessments);
-//         let length = keys.length
-//         let sum = 0;
-//         for(let i = 0; i < keys.length; i++){
-//             sum += this.assessments[keys[i]];   
-//         }
-    
-//         let average = sum / length;
-//         this.average = average;
-//         return average;
-//     },
-
-//     //provides feedback for the module
-//     feedback: function(){
-//         let output;
-//         let average = this.calcAverage();
-//         if(average >= 70){
-//             console.log(`Your score is ${average} and you currently have a first`);
-//         } else if(average >= 60 && average < 70){
-//             console.log(`Your score is ${average} and you currently have a 2.1`);
-//         }else if(average >= 50 && average < 60){
-//             console.log(`Your score is ${average} and you currently have a 2.2`);
-//         }else if(average >= 40 && average < 50){
-//             console.log(`Your score is ${average} and you and currently have a third`);
-//         } else {
-//             console.log(`Your score is ${average} and you have not passed yet`);
-//         }
-//     }
-// }
-
 //Object constructor
 //Allows you to create multiple instances of the same object
-function modules2(name, moduleCode, numofAssessments, average, credits){
-    this.name = name;
-    this.moduleCode = moduleCode;
-    this.numOfAssessments = numofAssessments;
-    this.average = average;
-    this.credits = credits;
-    this.assessments = {};
-    
-
-    //methods
-
-    //returns a string representation of the fields in the object
-    this.toString = function(){
-        console.log(`Databases ${this.moduleCode} is worth ${this.credits} credits and has ${this.calcNumOfAssessments()} asssessments`);
-    };
-
-    //adds a new assessment to the module
-    this.addAssessment =  function(name, grade){
-        this.assessments[name] = grade;
-        this.numofAssessments++;
-    };
-
-    //calulates the number of assessments in the module
-    this.calcNumOfAssessments = function(){
-        let keys = Object.keys(this.assessments);
-        this.numofAssessments = keys.length;
-        return keys.length;
-    };
-
-    //calculates teh average score for the module
-    this.calcAverage = function(){
-        let keys = Object.keys(this.assessments);
-        let length = keys.length
-        let sum = 0;
-        for(let i = 0; i < keys.length; i++){
-            sum += this.assessments[keys[i]];   
-        }
-    
-        let average = sum / length;
-        this.average = average;
-        return average;
-    };
-
-    //provides feedback for the module
-    this.feedback = function(){
-        let output;
-        let average = this.calcAverage();
-        if(average >= 70){
-            console.log(`Your score is ${average} and you currently have a first`);
-        } else if(average >= 60 && average < 70){
-            console.log(`Your score is ${average} and you currently have a 2.1`);
-        }else if(average >= 50 && average < 60){
-            console.log(`Your score is ${average} and you currently have a 2.2`);
-        }else if(average >= 40 && average < 50){
-            console.log(`Your score is ${average} and you and currently have a third`);
-        } else {
-            console.log(`Your score is ${average} and you have not passed yet`);
-        }
-    }
-
-}
-
 class assessment{
     constructor(name, yourScore, totalMarks, worth){
         if(yourScore > totalMarks){
@@ -195,13 +68,19 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
 
     //this method adds a new assessment to the module
     addAssessment(name, yourScore, totalMarks, worth){
+        let numOfCurrentAssessments = this.calcNumOfAssessments();
+
+        if(this.numOfAssessments - numOfCurrentAssessments <= 0){
+            console.log("You have already added the maximum number of assessments");
+            return 0;
+        }
+
         try{
             this.assessments[name] = new assessment(name, yourScore, totalMarks, worth);
         }
         catch(e){
             console.log(`Error: ${e.message}!`);
         }
-        
     }
 
     //this method calulates the number of assessments already taken in the module
@@ -213,15 +92,14 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
 
     //this method calculates the average score for the module
     calcAverage(){
-        let keys = Object.keys(this.assessments);
-        let length = keys.length;
+        let currentNumOfAssessments = this.calcNumOfAssessments();
         let sum = 0;
-        for(let i = 0; i < keys.length; i++){
+        for(let i = 0; i < currentNumOfAssessments; i++){
             sum += this.assessments[`coursework_${i+1}`].percent;   
         }
         console.log(`Sum is ${sum}`);
     
-        let average = sum / length;
+        let average = sum + currentNumOfAssessments;
         average = Number(average.toFixed(2));
         this.average = average;
         return average;
@@ -229,10 +107,10 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
 
     // this method calculates the weighted average for the module.
     calcWeightedAverage(){
-        let keys = Object.keys(this.assessments);
+        let currentNumOfAssessments = this.calcNumOfAssessments();
 
         let weightedAverage = 0;
-        for(let i = 0; i < keys.length; i++){
+        for(let i = 0; i < currentNumOfAssessments; i++){
             let grade = this.assessments[`coursework_${i+1}`].percent;
             
             let worth = this.assessments[`coursework_${i+1}`].worth;
@@ -276,14 +154,14 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
         if(marksForAFirst <= 0){
             console.log("You have already achieved a first");
         }else{
-            console.log(`You need to get at least ${marksForAFirst}%,${modules.calcGrade(marksForAFirst)}in the final assessment in order to get a first`);
+            console.log(`You need to get at least ${marksForAFirst}%,${module.calcGrade(marksForAFirst)}in the final assessment in order to get a first`);
         }
 
         let marksForATwoOne = (120 - num).toFixed(2);
         if(marksForATwoOne <= 0){
             console.log("You have already achieved a 2.1");
         }else{
-            console.log(`You need to get at least ${marksForATwoOne}%,${modules.calcGrade(marksForATwoOne)}in the final assessment in order to get a 2.1`);
+            console.log(`You need to get at least ${marksForATwoOne}%,${module.calcGrade(marksForATwoOne)}in the final assessment in order to get a 2.1`);
         }
 
         let marksForATwoTwo = (100 - num).toFixed(2);
@@ -291,7 +169,7 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
             console.log("You have already achieved a 2.2");
         }
         else{
-            console.log(`You need to get at least ${marksForATwoTwo}%,${modules.calcGrade(marksForATwoTwo)}in the final assessment in order to get a 2.2`);
+            console.log(`You need to get at least ${marksForATwoTwo}%,${module.calcGrade(marksForATwoTwo)}in the final assessment in order to get a 2.2`);
         }
         
         let marksForAPass = (80 - num).toFixed(2);
@@ -306,9 +184,9 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
 
     getWeightedProjections(num){
         //Calculate the percentage/worth of the final assessement
-        let keys = Object.keys(this.assessments);
+        let currentNumOfAssessments = this.calcNumOfAssessments();
         let sumOfTakenAssessements = 0;
-        for(let i = 0; i < keys.length; i++){
+        for(let i = 0; i < currentNumOfAssessments; i++){
             sumOfTakenAssessements += this.assessments[`coursework_${i+1}`].worth;
         }
         let worthOfFinalAssessment = 100 - sumOfTakenAssessements;
@@ -397,47 +275,37 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
                 console.log(`Your current mark is ${this.average}% and you currently have a 2.2.`);
                 this.getWeightedProjections(this.average);
             }else if(this.average >= 40 && this.average < 50){
-                console.log(`Your current mark is ${average}% and you and currently have a third.`);
+                console.log(`Your current mark is ${this.average}% and you and currently have a third.`);
                 this.getWeightedProjections(this.average);
             } else{
                 console.log(`Your current mark is ${this.average}% and you have not passed yet.`);
                 this.getWeightedProjections(this.average);
             }
         }
+        else{
+            console.log(`Your current mark is ${(this.average)}%.`);
+            console.log("You need to add more assessements to get feedback");
+        }
     }
 }
 
 // Tests
-let databases = new modules("Databases", "COMP1121", 5, 10);
+let databases = new modules("Databases", "COMP1121", 4, 10);
 
 // console.log(databases.name);
 // console.log(databases.assessments);
 
 //Programming for the web
-databases.addAssessment("coursework_1", 7.5, 15, 10);
-databases.addAssessment("coursework_2", 7, 15, 10);
-databases.addAssessment("coursework_3", 12.5, 15, 10);
-databases.addAssessment("coursework_4", 7.0, 15, 10);
-
-//Professional computing
-// databases.addAssessment("coursework_1", 38, 40, 20);
-// databases.addAssessment("coursework_2", 70, 100, 20);
-// databases.addAssessment("coursework_3", 78.3, 100, 60);
+databases.addAssessment("coursework_1", 10, 10, 10);
+databases.addAssessment("coursework_2", 29, 30, 20);
+// databases.addAssessment("coursework_3", 20, 30, 30);
+// databases.addAssessment("coursework_4", 14, 16, 10);
 
 
 
-// console.log(databases.assessments);
-// console.log(databases.credits);
-// console.log(databases.assessments.coursework_3.score);
-
-
-// console.log("****Weighted Average****");
-// console.log(databases.calcWeightedAverage);
-// console.log("\n");
 
 console.log("****Weighted Projections****");
-// databases.getWeightedProjections(33);
-// console.log("\n");
+
 
 console.log("****Feedback****");
 databases.feedback();
