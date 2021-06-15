@@ -5,11 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grade Calculator</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Grade Calculator</h1>
+    
+    <!-- <div class="module"></div> -->
 
+    <div class="main-container">
+        <div class="dashboard-header">
+            <h1 class= "main-title">Grade Calculator</h1>
+            <img class= "settings-button" src="#"/>
+        </div>
+
+        <div class="dashboard-container">
+            <div class="dashboard-container-header">
+                <h1 class="welcome-message">Welcome back</h1>
+                <div>
+                    <button class="button add-module-button">ADD MODULE</button>
+                    <button class="button delete-module-button">DELETE MODULE</button>
+                </div>
+            </div>
+
+            <div class="modules-container">
+                <div class="module original-module">
+                    <div class="module-details">
+                       <p class="module-name">Module Name</p> 
+                       <div class="module-buttons">
+                            <button class="button add-assessment-button">ADD ASSESSMENT</button>
+                            <button class="button delete-assessment-button">DELETE ASSESSMENT</button>
+                            <button class="button module-details-button">MODULE DETAILS</button>
+                            <button class="button module-feedback-button">MODULE FEEDBACK</button>
+                        </div>   
+                   </div>
+
+                    <div class="module-dropdown">
+                        <div class="assessment">
+                            <p > Coursework 1 </p>
+                        </div>
+                        <div class="assessment">
+                            <p > Coursework 2 </p>
+                        </div>
+                        
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
     <script src="scripts/scripts.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>

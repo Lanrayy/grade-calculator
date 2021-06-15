@@ -254,4 +254,48 @@ console.log("\n");
 
 
 //Main program
-console.log(document.getElementById("main").textContent);
+// console.log(document.getElementById("main").textContent);
+
+let addModuleButton = document.querySelector(".add-module-button");
+let modulesContainer = document.querySelector(".modules-container");
+let addAssessmentButton = document.querySelector(".add-assessment-button");
+let node = document.querySelector(".original-module");
+
+//Add Module
+addModuleButton.addEventListener("click", function(){
+    let copy = node.cloneNode(true);
+    // modulesContainer.style.backgroundColor = "red";
+    let newElement = document.createElement("div");
+    newElement.setAttribute("class", "module" );
+    modulesContainer.appendChild(copy);
+});
+
+//Delete Module
+let deleteModuleButton = document.querySelector(".delete-module-button");
+deleteModuleButton.addEventListener("click", function(){
+    // modulesContainer.style.backgroundColor = "red";
+    let node_list = document.querySelectorAll(".module");
+    let last =node_list[node_list.length -1];
+    modulesContainer.removeChild(last);
+});
+
+
+//Add Assessement to module
+let modulesDropdown = document.querySelector(".module-dropdown");
+addAssessmentButton.addEventListener("click", function(){
+    // modulesContainer.style.backgroundColor = "red";
+    let newElement = document.createElement("div");
+    let text = document.createTextNode("Coursework");
+    newElement.appendChild(text);
+    newElement.setAttribute("class", "assessment" );
+    modulesDropdown.appendChild(newElement);
+});
+
+//Delete Assessment Button
+let deleteAssessmentButton = document.querySelector(".delete-assessment-button");
+deleteAssessmentButton.addEventListener("click", function(){
+    // modulesContainer.style.backgroundColor = "red";
+    let node_list = document.querySelectorAll(".assessment");
+    let last = node_list[node_list.length -1];
+    modulesDropdown.removeChild(last);
+});

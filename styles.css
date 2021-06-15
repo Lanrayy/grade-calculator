@@ -1,0 +1,138 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: gainsboro;
+  height: 820px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+}
+
+.button {
+  width: 156px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  font-family: "Montserrat";
+  font-weight: 600;
+  font-size: 12px;
+  background-color: #233975;
+  color: white;
+}
+
+.button:hover {
+  background-color: #38932c;
+}
+
+/* Main container styles */
+.main-container {
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+}
+
+.dashboard-header {
+  border: 1px solid red;
+  height: 160px;
+  background-color: aquamarine;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-title {
+  font-size: 50px;
+}
+
+.dashboard-container {
+  border: 2px solid green;
+  background-color: white;
+  height: 700px;
+  padding: 30px;
+}
+
+.dashboard-container-header {
+  border: 1px solid black;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.welcome-message {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.modules-container {
+  background-color: rgb(219, 219, 219);
+  border: 1px solid green;
+  min-height: 600px;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  /* flex-direction: row; */
+  margin-top: 10px;
+}
+
+.module {
+  width: 100%;
+  height: fit-content;
+  min-height: 70px;
+  margin-bottom: 20px;
+  background-color: green;
+  border: 2px dashed blue;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.module-details {
+  background-color: gray;
+  width: 100%;
+  height: 60px;
+  border-radius: 10px 10px 0px 0px;
+  padding: 0px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.module-name {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.module-dropdown {
+  background-color: rgb(235, 231, 232);
+  width: 100%;
+  height: fit-content;
+  font-size: 18px;
+
+  display: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.assessment {
+  height: 40px;
+  border: 1px solid gray;
+  padding: 0px 20px;
+
+  display: flex;
+  align-items: center;
+}
+
+/* .module {
+  background-color: green;
+  width: 50px;
+  height: 50px;
+} */
