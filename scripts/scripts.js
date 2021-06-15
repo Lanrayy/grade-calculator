@@ -299,3 +299,12 @@ deleteAssessmentButton.addEventListener("click", function(){
     let last = node_list[node_list.length -1];
     modulesDropdown.removeChild(last);
 });
+
+//Minimise 
+let minimiseButton = document.querySelector(".minimise-button");
+minimiseButton.addEventListener("click", function(){
+    // modulesContainer.style.backgroundColor = "red";
+    let dropdown = document.querySelector(".module-dropdown");
+
+    dropdown.classList.toggle("hide");
+});

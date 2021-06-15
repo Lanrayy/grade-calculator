@@ -10,6 +10,41 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="add-module-pop-up-container">
+        <div class="add-module-popup">
+            <div class="popup-title"><h1>Add Module</h1></div>
+            
+            <div class="popup-input-container">
+                <label for="module-name">Name:</label>
+                <input type="text" id="module-name" placeholder="Enter module name..."/>
+            </div>
+
+            <div class="popup-input-container">
+                <label for="module-code">Module Code:</label>
+                <input type="text" id="module-code" placeholder="Enter module code..."/>
+            </div>
+
+            <div class="popup-input-container">
+                <label for="num-of-assessments">Number of Assesments:</label>
+                <input type="number" id="num-of-assessments" placeholder="Enter number of Assessments for this module..."/>
+            </div>
+
+            <div class="popup-input-container">
+                <label for="credits">Number of Credits:</label>
+                <input type="number" id="credits" placeholder="Enter number of credits for this module"/>
+            </div>
+
+
+
+            <div class="popup-buttons">
+                <button class="button popup-button">Cancel</button>
+                <button class="button popup-button">Save</button>
+            </div>
+            
+
+        </div>
+        <div class="add-module-popup-overlay"></div>
+    </div>
     
     <!-- <div class="module"></div> -->
 
@@ -37,6 +72,7 @@
                             <button class="button delete-assessment-button">DELETE ASSESSMENT</button>
                             <button class="button module-details-button">MODULE DETAILS</button>
                             <button class="button module-feedback-button">MODULE FEEDBACK</button>
+                            <button class="button minimise-button">MINIMISE</button>
                         </div>   
                    </div>
 
@@ -53,6 +89,9 @@
             </div>
         </div>
     </div>
+
+
+
     <script src="scripts/scripts.js"></script>
     <script src="scripts/main.js"></script>
 </body>
