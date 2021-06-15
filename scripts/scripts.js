@@ -216,7 +216,7 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
     //calculates the average score for the module
     calcAverage(){
         let keys = Object.keys(this.assessments);
-        console.log(`Length is ${length}`);
+        let length = keys.length;
         let sum = 0;
         for(let i = 0; i < keys.length; i++){
             sum += this.assessments[`coursework_${i+1}`].percent;   
@@ -310,27 +310,33 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
     getWeightedProjections(num){
         // Calculate the percentage of the final assessement
         let keys = Object.keys(this.assessments);
+        let sumOfTakenAssessements = 0;
         for(let i = 0; i < keys.length; i++){
-
+            sumOfTakenAssessements += this.assessments[`coursework_${i+1}`].worth;
         }
 
-        let marksForAFirst = (70 - num) / (this.w);
+        let worthOfFinalAssessment = 100 - sumOfTakenAssessements;
 
-        
+        //Calculate the marks need for a first using the weighted average
+        //Show it to the user
+
+        let marksForAFirst = ((70 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
+        console.log(marksForAFirst);
+        //if the marks needed for a first is less than zero, then the student has ahieved a first already regardless of the result of the final assessment. 
         if(marksForAFirst <= 0){
             console.log("You have already achieved a first");
         }else{
             console.log(`You need to get at least ${marksForAFirst}%,${modules.calcGrade(marksForAFirst)}in the final assessment in order to get a first`);
         }
 
-        let marksForATwoOne = (120 - num).toFixed(2);
+        let marksForATwoOne = ((60 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
         if(marksForATwoOne <= 0){
             console.log("You have already achieved a 2.1");
         }else{
             console.log(`You need to get at least ${marksForATwoOne}%,${modules.calcGrade(marksForATwoOne)}in the final assessment in order to get a 2.1`);
         }
 
-        let marksForATwoTwo = (100 - num).toFixed(2);
+        let marksForATwoTwo = ((50 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
         if(marksForATwoTwo <= 0){
             console.log("You have already achieved a 2.2");
         }
@@ -338,12 +344,18 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
             console.log(`You need to get at least ${marksForATwoTwo}%,${modules.calcGrade(marksForATwoTwo)}in the final assessment in order to get a 2.2`);
         }
         
-        let marksForAPass = (80 - num).toFixed(2);
+        let marksForAPass = ((40 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
         if(marksForAPass <= 0){
             console.log("You have already passed");
         }
         else{
-            console.log(`You need to get at least ${marksForAPass}%,${modules.calcGrade(marksForAPass)}in the final assessment in order to get a Pass`);
+            if(marksForAPass > 100){
+                console.log("Unfortunately, You cannot pass this module");
+            }
+            else{
+                console.log(`You need to get at least ${marksForAPass}%,${modules.calcGrade(marksForAPass)}in the final assessment in order to get a Pass`);
+            }
+            
         }
     }
 
@@ -407,8 +419,8 @@ let databases = new modules("Databases", "COMP1121", 3, 10);
 // console.log(databases.assessments);
 
 //Programming for the web
-databases.addAssessment("coursework_1", 30, 30, 30);
-databases.addAssessment("coursework_2", 30, 30, 30);
+databases.addAssessment("coursework_1", 30, 40, 20);
+databases.addAssessment("coursework_2", 70, 100, 20);
 // databases.addAssessment("coursework_3", 39, 40, 40);
 
 //Professional computing
@@ -426,8 +438,12 @@ console.log(databases.calcAverage());
 console.log(databases.average);
 console.log("\n");
 
-console.log("****Weigthed Average****");
+console.log("****Weighted Average****");
 console.log(databases.calcWeightedAverage);
+console.log("\n");
+
+console.log("****Weighted Projections****");
+databases.getWeightedProjections(33);
 console.log("\n");
 
 console.log("****Feedback****");
