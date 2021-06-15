@@ -61,7 +61,7 @@ class modules{
     
     //methods
     //returns a string representation of the fields in the object
-    details(){
+    moduleDetails(){
         console.log(`Databases ${this.moduleCode} is worth ${this.credits} credits and has ${this.numOfAssessments} assessments.
 You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
     };
@@ -88,21 +88,6 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
         let keys = Object.keys(this.assessments);
         this.numofAssessments = keys.length;
         return keys.length;
-    };
-
-    //this method calculates the average score for the module
-    calcAverage(){
-        let currentNumOfAssessments = this.calcNumOfAssessments();
-        let sum = 0;
-        for(let i = 0; i < currentNumOfAssessments; i++){
-            sum += this.assessments[`coursework_${i+1}`].percent;   
-        }
-        console.log(`Sum is ${sum}`);
-    
-        let average = sum + currentNumOfAssessments;
-        average = Number(average.toFixed(2));
-        this.average = average;
-        return average;
     };
 
     // this method calculates the weighted average for the module.
@@ -144,43 +129,6 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
             return " ";
         }
     }
-
-
-    //this function lets the user know what marks the user has to get for each grade in the module.
-    //this method caluculates what the user needs to get for the final assessement for each grade.
-    getProjections(num){
-        let marksForAFirst = (140 - num).toFixed(2);
-        
-        if(marksForAFirst <= 0){
-            console.log("You have already achieved a first");
-        }else{
-            console.log(`You need to get at least ${marksForAFirst}%,${module.calcGrade(marksForAFirst)}in the final assessment in order to get a first`);
-        }
-
-        let marksForATwoOne = (120 - num).toFixed(2);
-        if(marksForATwoOne <= 0){
-            console.log("You have already achieved a 2.1");
-        }else{
-            console.log(`You need to get at least ${marksForATwoOne}%,${module.calcGrade(marksForATwoOne)}in the final assessment in order to get a 2.1`);
-        }
-
-        let marksForATwoTwo = (100 - num).toFixed(2);
-        if(marksForATwoTwo <= 0){
-            console.log("You have already achieved a 2.2");
-        }
-        else{
-            console.log(`You need to get at least ${marksForATwoTwo}%,${module.calcGrade(marksForATwoTwo)}in the final assessment in order to get a 2.2`);
-        }
-        
-        let marksForAPass = (80 - num).toFixed(2);
-        if(marksForAPass <= 0){
-            console.log("You have already passed");
-        }
-        else{
-            console.log(`You need to get at least ${marksForAPass}%,${modules.calcGrade(marksForAPass)}in the final assessment in order to get a Pass`);
-        }
-    }
-
 
     getWeightedProjections(num){
         //Calculate the percentage/worth of the final assessement
@@ -292,37 +240,18 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
 // Tests
 let databases = new modules("Databases", "COMP1121", 4, 10);
 
-// console.log(databases.name);
-// console.log(databases.assessments);
-
 //Programming for the web
 databases.addAssessment("coursework_1", 10, 10, 10);
 databases.addAssessment("coursework_2", 29, 30, 20);
-// databases.addAssessment("coursework_3", 20, 30, 30);
+databases.addAssessment("coursework_3", 20, 30, 30);
 // databases.addAssessment("coursework_4", 14, 16, 10);
-
-
-
-
-console.log("****Weighted Projections****");
-
 
 console.log("****Feedback****");
 databases.feedback();
 console.log("\n");
 
-// console.log("Details");
-// databases.details();
-// console.log("\n");
-// databases.calcGrade();
 
-// console.log(module.toString());
-// module.calcAverage();
-// console.log(module.calcAverage())
-// module.feedback();
 
-// module.toString();
 
-// module.addAssessment("coursework_5", 70);
-// module.toString();
-// module.feedback();
+//Main program
+console.log(document.getElementById("main").textContent);
