@@ -230,6 +230,9 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
         return average;
     };
 
+
+
+
     //returns the average grade for the module
     static calcGrade(num){
         if(num >= 70){
@@ -317,35 +320,28 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
             //if average is first, tell user that they have already achieved a first.
             if(this.average >= 70)
             {
-                console.log(`Your score is ${this.average} and you currently have a first.`);
+                console.log(`Your mark is ${this.average}% and you currently have a first.`);
                 this.getProjections(this.average);
             } 
             // if they have a 2.1 tell them how much they need to get a first on the last assessement
             else if(this.average >= 60 && this.average < 70)
             {
-                console.log(`Your score is ${(this.average)} and you currently have a 2.1.`);
+                console.log(`Your mark is ${(this.average)}% and you currently have a 2.1.`);
                 this.getProjections(this.average);
             }else if(this.average >= 50 && this.average < 60){
-                console.log(`Your score is ${this.average} and you currently have a 2.2.`);
+                console.log(`Your mark is ${this.average}% and you currently have a 2.2.`);
                 this.getProjections(this.average);
             }else if(this.average >= 40 && this.average < 50){
-                console.log(`Your score is ${average} and you and currently have a third.`);
+                console.log(`Your mark is ${average}% and you and currently have a third.`);
                 this.getProjections(this.average);
             } else {
-                console.log(`Your score is ${this.average} and you have not passed yet.`);
+                console.log(`Your mark is ${this.average}% and you have not passed yet.`);
                 this.getProjections(this.average);
             }
-
         }
     }
 
 }
-
-
-
-
-
-
 
 
 
