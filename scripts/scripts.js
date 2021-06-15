@@ -149,7 +149,7 @@ class assessment{
         this.score = yourScore;
         this.totalMarks = totalMarks;
         this.percent = this.calcPercentage(yourScore, totalMarks);
-        this.worth = `${worth}%`;
+        this.worth = worth;
         this.grade = this.calcGrade(this.percent);
     }
 
@@ -181,9 +181,9 @@ class modules{
         this.name = name;
         this.moduleCode = moduleCode;
         this.numOfAssessments = numofAssessments;
-        this.average = this.calcAverage;
+        this.average = this.calcWeightedAverage;
         this.credits = credits;
-        // an assessment object containing other objects;
+        // an object containing assessment objects;
         this.assessments = {};
     };
     
@@ -216,7 +216,6 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
     //calculates the average score for the module
     calcAverage(){
         let keys = Object.keys(this.assessments);
-        let length = keys.length;
         console.log(`Length is ${length}`);
         let sum = 0;
         for(let i = 0; i < keys.length; i++){
@@ -229,6 +228,24 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
         this.average = average;
         return average;
     };
+
+    //this method calculates the weighted average for the module.
+    calcWeightedAverage(){
+        let keys = Object.keys(this.assessments);
+
+        let weightedAverage = 0;
+        for(let i = 0; i < keys.length; i++){
+            let grade = this.assessments[`coursework_${i+1}`].percent;
+            
+            let worth = this.assessments[`coursework_${i+1}`].worth;
+            worth /= 100;
+
+            weightedAverage += (grade * worth);
+        }
+        weightedAverage = weightedAverage.toFixed(2);
+        return weightedAverage;
+
+    }
 
 
 
@@ -287,7 +304,47 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
         else{
             console.log(`You need to get at least ${marksForAPass}%,${modules.calcGrade(marksForAPass)}in the final assessment in order to get a Pass`);
         }
+    }
+
+
+    getWeightedProjections(num){
+        // Calculate the percentage of the final assessement
+        let keys = Object.keys(this.assessments);
+        for(let i = 0; i < keys.length; i++){
+
+        }
+
+        let marksForAFirst = (70 - num) / (this.w);
+
         
+        if(marksForAFirst <= 0){
+            console.log("You have already achieved a first");
+        }else{
+            console.log(`You need to get at least ${marksForAFirst}%,${modules.calcGrade(marksForAFirst)}in the final assessment in order to get a first`);
+        }
+
+        let marksForATwoOne = (120 - num).toFixed(2);
+        if(marksForATwoOne <= 0){
+            console.log("You have already achieved a 2.1");
+        }else{
+            console.log(`You need to get at least ${marksForATwoOne}%,${modules.calcGrade(marksForATwoOne)}in the final assessment in order to get a 2.1`);
+        }
+
+        let marksForATwoTwo = (100 - num).toFixed(2);
+        if(marksForATwoTwo <= 0){
+            console.log("You have already achieved a 2.2");
+        }
+        else{
+            console.log(`You need to get at least ${marksForATwoTwo}%,${modules.calcGrade(marksForATwoTwo)}in the final assessment in order to get a 2.2`);
+        }
+        
+        let marksForAPass = (80 - num).toFixed(2);
+        if(marksForAPass <= 0){
+            console.log("You have already passed");
+        }
+        else{
+            console.log(`You need to get at least ${marksForAPass}%,${modules.calcGrade(marksForAPass)}in the final assessment in order to get a Pass`);
+        }
     }
 
     //this method will provide complete feedback to the user about the module.
@@ -298,17 +355,17 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
             console.log("No assessments left");
 
             if(this.average >= 70){
-                console.log(`Your final mark is ${(this.average)}% and your final grade is a first`);
+                console.log(`Your final mark is ${(Math.trunc(this.average))}% and your final grade is a first`);
             } else if(this.average >= 60 && this.average < 70){
-                console.log(`Your final mark is ${(this.average)}% and your final grade is a 2.1`);
+                console.log(`Your final mark is ${(Math.trunc(this.average))}% and your final grade is a 2.1`);
                 
             }else if(this.average >= 50 && this.average < 60){
-                console.log(`Your final mark is ${(this.average)}% and your final grade is a 2.2`);
+                console.log(`Your final mark is ${(Math.trunc(this.average))}% and your final grade is a 2.2`);
                 
             }else if(this.average >= 40 && this.average < 50){
-                console.log(`Your final mark is ${(this.average)}% and your final grade is a Pass`);
+                console.log(`Your final mark is ${(Math.trunc(this.average))}% and your final grade is a Pass`);
             } else {
-                console.log(`Your final mark is ${(this.average)}% and you did not pass this module`);
+                console.log(`Your final mark is ${(Math.trunc(this.average))}% and you did not pass this module`);
             }
 
         }
@@ -343,33 +400,43 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
 
 }
 
-
-
 // Tests
+let databases = new modules("Databases", "COMP1121", 3, 10);
 
-let databases = new modules("Databases", "COMP1121", 4, 10);
+// console.log(databases.name);
+// console.log(databases.assessments);
 
-console.log(databases.name);
-console.log(databases.assessments);
-
-
-databases.addAssessment("coursework_1", 5, 40, 30);
+//Programming for the web
+databases.addAssessment("coursework_1", 30, 30, 30);
 databases.addAssessment("coursework_2", 30, 30, 30);
-databases.addAssessment("coursework_3", 29, 30, 30);
+// databases.addAssessment("coursework_3", 39, 40, 40);
 
-console.log(databases.assessments);
-console.log(databases.credits);
-console.log(databases.assessments.coursework_3.score);
+//Professional computing
+// databases.addAssessment("coursework_1", 38, 40, 20);
+// databases.addAssessment("coursework_2", 70, 100, 20);
+// databases.addAssessment("coursework_3", 78.3, 100, 60);
+
+
+
+// console.log(databases.assessments);
+// console.log(databases.credits);
+// console.log(databases.assessments.coursework_3.score);
+console.log("****Normal Average****");
 console.log(databases.calcAverage());
 console.log(databases.average);
+console.log("\n");
 
-console.log("Rest");
+console.log("****Weigthed Average****");
+console.log(databases.calcWeightedAverage);
+console.log("\n");
+
+console.log("****Feedback****");
 databases.feedback();
 console.log("\n");
 
-console.log("details");
-databases.details();
-console.log("\n");
+// console.log("Details");
+// databases.details();
+// console.log("\n");
 // databases.calcGrade();
 
 // console.log(module.toString());
