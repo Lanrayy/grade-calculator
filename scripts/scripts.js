@@ -261,25 +261,32 @@ let setModuleName = function(node, nameofModule){
 //this function sets the button to specific module
 let setAddAssessmentButton = function(node, nameofModule){
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.classList.add(`${nameofModule}-add-assessment-button`);
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.classList.add(`${nameofModule}`);
 }
 
 let setDeleteAssessmentButton = function(node, nameofModule){
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-delete-assessment-button`);
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
 }
 let setModuleDetailsButton = function(node, nameofModule){
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-module-details-button`);
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
 }
 
 let setModuleFeedbackButton = function(node, nameofModule){
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-module-feedback-button`);
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
+
 }
 
 let setMinimizeButton = function(node, nameofModule){
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-minimise-button`);
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
 }
 
 let setModuleDropdownClassName = function(node, nameofModule){
     node.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-module-dropdown`);
+    node.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
 }
 
 //Main program
@@ -344,7 +351,7 @@ popupSaveButton.addEventListener("click", function(){
     setModuleDetailsButton(copy, moduleName);
     setModuleFeedbackButton(copy, moduleName);
     setMinimizeButton(copy, moduleName);
-    setModuleDropdown(copy, moduleName);
+    setModuleDropdownClassName(copy, moduleName);
 
     let newElement = document.createElement("div");
     newElement.setAttribute("class", "module" );
@@ -364,30 +371,26 @@ deleteModuleButton.addEventListener("click", function(){
     modulesContainer.removeChild(last);
 });
 
-
 //Add Assessement to module
+let addAssessment = function(element){
+    let moduleName = element.classList[2];
+    console.log(moduleName);
 
-let button = document.querySelector("click", function(){
-
-});
-
-let addAssessmentButton = document.querySelector(".add-assessment-button");
-let modulesDropdown = document.querySelector(".module-dropdown");
-addAssessmentButton.addEventListener("click", function(){
-    console.log(this.classList);
-
-    // modulesContainer.style.backgroundColor = "red";
+    let modulesDropdown = document.querySelector(`.${moduleName}-module-dropdown`);
+    ///Create a new class and and assessment class to new item
     let newElement = document.createElement("div");
     let text = document.createTextNode("Coursework");
     newElement.appendChild(text);
     newElement.setAttribute("class", "assessment" );
     modulesDropdown.appendChild(newElement);
-});
+}
+
+
+
 
 //Delete Assessment Button
 let deleteAssessmentButton = document.querySelector(".delete-assessment-button");
 deleteAssessmentButton.addEventListener("click", function(){
-    // modulesContainer.style.backgroundColor = "red";
     let node_list = document.querySelectorAll(".assessment");
     let last = node_list[node_list.length -1];
     modulesDropdown.removeChild(last);
