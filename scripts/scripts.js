@@ -133,13 +133,17 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
         let currentNumOfAssessments = this.calcNumOfAssessments();
         let sumOfTakenAssessements = 0;
         for(let i = 0; i < currentNumOfAssessments; i++){
-            sumOfTakenAssessements += this.assessments[`assessment_${i+1}`].worth;
+            sumOfTakenAssessements += Number(this.assessments[`assessment_${i+1}`].worth);
         }
         let worthOfFinalAssessment = 100 - sumOfTakenAssessements;
 
         //Calculate the marks need for a first using the weighted average
         //Show it to the user
+        console.log(`Sum: ${sumOfTakenAssessements}`);
+        console.log(`Worth of final assessmet: ${worthOfFinalAssessment}`);
+
         let marksForAFirst = ((70 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
+        console.log(marksForAFirst);
         //if the marks needed for a first is less than zero, then the student has ahieved a first already regardless of the result of the final assessment. 
         if(marksForAFirst <= 0){
             console.log("You have already achieved a first");
@@ -230,7 +234,7 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
         }
         else{
             console.log(`Your current mark is ${(this.average)}%.`);
-            console.log("You need to add more assessements to get feedback");
+            console.log("You need to add more assessements to get better insights.");
         }
     }
 }
@@ -364,6 +368,8 @@ let deleteModule = function(element){
     console.log(modulesContainer);
     //Delete the selected module
     modulesContainer.removeChild(moduleToDelete);
+
+    delete modulesList[`${moduleName}`];
 };
 
 let numberOfAssessmentTaken = 1;
@@ -388,14 +394,14 @@ let saveAssessment = function() {
     console.log(totalMarks);
     console.log(worth);
 
-
+    //Add the assessement to the specific module
     modulesList[`${moduleName}`].addAssessment(assessmentName, score, totalMarks, worth);
 
-
+    //Create a button and add it to the element
     let newElement = document.createElement("div");
     let text = document.createTextNode(userAssessmentName);
     let deleteButton = document.createElement("button");
-    deleteButton.classList.add("button", "cancel-button", `${moduleName}-delete-assessment-button`, `${moduleName}`, `${moduleName}-${assessmentName}`);
+    deleteButton.classList.add("button", "cancel-button", `${moduleName}-delete-assessment-button`, `${moduleName}`, `${moduleName}-${assessmentName}`, `${assessmentName}`);
     deleteButton.setAttribute("onclick", "deleteAssessment(this)");
     deleteButton.textContent = "DELETE ASSESSMENT";
 
@@ -431,7 +437,14 @@ let addAssessment = function(element){
 let deleteAssessment = function(element){
     //Get the name of the class, the target dropdown & id of the element to delete
     let moduleName = element.classList[3];
+    console.log(element);
+    console.log(moduleName);
+    console.log("This" + element.classList[5]);
+
     let assessementToDelete = element.classList[4];
+
+    // console.log(element);
+    // console.log(element.classList[5]);
     let modulesDropdown = document.querySelector(`.${moduleName}-module-dropdown`);
 
     //Obtain the node of the element 
@@ -439,24 +452,28 @@ let deleteAssessment = function(element){
 
     //Try to remove the node, if it can't log a message
     try{
+        //Remove the assessement object from the modulesListObject
+        delete modulesList[`${moduleName}`]["assessments"][`${element.classList[5]}`];
+
+        //Remove the node from the website
         modulesDropdown.removeChild(node);
+
     }catch(e){
         console.log("Error: Cannot remove assessment!");
-    }
-    
+    } 
 }
 
 //This funtion will provide information to the user about the module.
 let moduleDetails = function(element){
     let moduleName = element.classList[2];
     modulesList[`${moduleName}`].moduleDetails();
+    console.log(modulesList);
 }
 
 //This funtion will provide feedback to the user about the module.
 let moduleFeedback = function(element){
     let moduleName = element.classList[2];
     modulesList[`${moduleName}`].feedback();
-    
 }
 
 //this function, minimises the module dropdown list
@@ -466,10 +483,6 @@ let minimise = function(element){
     //Get module name & target drop down
     let moduleName = element.classList[2];
     let dropdown= document.querySelector(`.${moduleName}-module-dropdown`);
-
     dropdown.classList.toggle("hide");
 }
-
-
-
 
