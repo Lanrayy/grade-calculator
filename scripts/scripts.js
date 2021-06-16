@@ -442,9 +442,12 @@ let moduleFeedback = function(element){
 
 //this function, minimised module dropdown
 let minimise = function(element){
+    //Change the name of the button
+    element.textContent == "MINIMISE"? element.textContent = "MAXIMISE" : element.textContent = "MINIMISE";
     //Get module name & target drop down
     let moduleName = element.classList[2];
     let dropdown= document.querySelector(`.${moduleName}-module-dropdown`);
+
     dropdown.classList.toggle("hide");
 }
 
