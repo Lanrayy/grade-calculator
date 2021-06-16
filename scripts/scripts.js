@@ -328,6 +328,11 @@ let saveModule = function(){
     let numOfAssessments = document.querySelector("#num-of-assessments").value;
     let credits = document.querySelector("#credits").value;
 
+    if(userModuleName == "" || moduleCode == "" || numOfAssessments == "" || credits == ""){
+        alert("Please check all the fields and ensure you enter valid values!");
+        return 0;
+    }
+
     //Create a new module
     modulesList[`${moduleName}`]= new modules(moduleName, moduleCode, numOfAssessments, credits); 
     // sampleModule = new modules(moduleName, moduleCode, numOfAssessments, credits);
@@ -388,6 +393,12 @@ let saveAssessment = function() {
     let score = document.querySelector("#score").value;
     let totalMarks = document.querySelector("#total-marks").value;
     let worth = document.querySelector("#worth").value;
+
+
+    if(userAssessmentName == "" || score == "" || totalMarks == "" || worth == "" || worth > 100 || score > totalMarks){
+        alert("Please check all the fields and ensure you enter valid values!");
+        return 0;
+    }
 
     console.log(assessmentName);
     console.log(score);
