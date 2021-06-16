@@ -231,3 +231,7 @@ input:focus {
   width: 100px;
   margin-right: 10px;
 }
+
+.original-module {
+  display: none;
+}

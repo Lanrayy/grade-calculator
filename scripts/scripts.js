@@ -46,7 +46,6 @@ class assessment{
     }
 }
 
-
 class modules{
 
     constructor(name, moduleCode, numofAssessments, credits){
@@ -107,7 +106,6 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
         this.average = weightedAverage;
 
         return weightedAverage;
-
     }
 
     //this method calculates the grade that the user has gotten
@@ -250,8 +248,6 @@ console.log("****Feedback****");
 databases.feedback();
 console.log("\n");
 
-
-
 //Additional methods
 //this function sets the button to specific module
 let setModuleName = function(node, nameofModule){
@@ -290,8 +286,6 @@ let setModuleDropdownClassName = function(node, nameofModule){
 }
 
 //Main program
-// console.log(document.getElementById("main").textContent);
-
 
 let modulesContainer = document.querySelector(".modules-container");
 let node = document.querySelector(".original-module");
@@ -331,10 +325,7 @@ popupSaveButton.addEventListener("click", function(){
     console.log(typeof credits);
 
     //Create a new module
-
     let new_module = new modules(moduleName, moduleCode, numOfAssessments, credits);
-
-    //Display that information in the new module in the HTML page
 
 
     //Close the popup
@@ -343,6 +334,7 @@ popupSaveButton.addEventListener("click", function(){
 
     //Add the new module to the list
     let copy = node.cloneNode(true);
+    copy.classList.remove('original-module');
 
     //Set the class names for buttons of the new module
     setModuleName(copy,moduleName);
@@ -360,8 +352,6 @@ popupSaveButton.addEventListener("click", function(){
     modulesContainer.appendChild(copy);
 })
 
-
-
 //Delete Module
 let deleteModuleButton = document.querySelector(".delete-module-button");
 deleteModuleButton.addEventListener("click", function(){
@@ -373,37 +363,57 @@ deleteModuleButton.addEventListener("click", function(){
 
 //Add Assessement to module
 let addAssessment = function(element){
+    //Get the name of the class & the target dropdown
     let moduleName = element.classList[2];
-    console.log(moduleName);
-
     let modulesDropdown = document.querySelector(`.${moduleName}-module-dropdown`);
-    ///Create a new class and and assessment class to new item
+
+    ///Create a new div assessment element and add text to the element
     let newElement = document.createElement("div");
     let text = document.createTextNode("Coursework");
+
+    //Append the text to the new element 
     newElement.appendChild(text);
     newElement.setAttribute("class", "assessment" );
+    newElement.classList.add(`${moduleName}-assessment`);
+
+    //append new assessment to the dropdown
     modulesDropdown.appendChild(newElement);
 }
 
+//this funtion deletes an assessment from the list of assessments
+let deleteAssessment = function(element){
+    //Get the name of the class & teh taget dropdown
+    let moduleName = element.classList[3];
+    let modulesDropdown = document.querySelector(`.${moduleName}-module-dropdown`);
 
+    let node_list = document.querySelectorAll(`.${moduleName}-assessment`);
 
+    let last = node_list[node_list.length-1];
+    try{
+        modulesDropdown.removeChild(last);
+    }catch(e){
+        console.log("Error: There are no assessments to delete!");
+    }
+    
+}
 
-//Delete Assessment Button
-let deleteAssessmentButton = document.querySelector(".delete-assessment-button");
-deleteAssessmentButton.addEventListener("click", function(){
-    let node_list = document.querySelectorAll(".assessment");
-    let last = node_list[node_list.length -1];
-    modulesDropdown.removeChild(last);
-});
+//TODO: 
+let moduleDetails = function(element){
 
-//Minimise 
-let minimiseButton = document.querySelector(".minimise-button");
-minimiseButton.addEventListener("click", function(){
-    // modulesContainer.style.backgroundColor = "red";
-    let dropdown = document.querySelector(".module-dropdown");
+}
 
+//TODO:
+let moduleFeedback = function(element){
+
+}
+
+//this function, minimised module dropdown
+let minimise = function(element){
+    //Get module name & target drop down
+    let moduleName = element.classList[2];
+    let dropdown= document.querySelector(`.${moduleName}-module-dropdown`);
     dropdown.classList.toggle("hide");
-});
+}
 
 
 

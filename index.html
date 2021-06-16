@@ -59,7 +59,7 @@
                 <h1 class="welcome-message">Welcome back</h1>
                 <div>
                     <button class="button add-module-button">ADD MODULE</button>
-                    <button class="button delete-module-button">DELETE MODULE</button>
+                    <button class="button delete-module-button cancel-button">DELETE MODULE</button>
                 </div>
             </div>
 
@@ -70,20 +70,20 @@
                        <p class="module-name">Module Name</p> 
                        <div class="module-buttons">
                             <button onclick="addAssessment(this)" class="button">ADD ASSESSMENT</button>
-                            <button onclick="deleteAssignment(this)" class="button">DELETE ASSESSMENT</button>
-                            <button class="button">MODULE DETAILS</button>
-                            <button class="button">MODULE FEEDBACK</button>
-                            <button class="button">MINIMISE</button>
+                            <button onclick="deleteAssessment(this)" class="button cancel-button">DELETE ASSESSMENT</button>
+                            <button onclick="moduleDetails(this)" class="button">MODULE DETAILS</button>
+                            <button onclick="moduleFeedback(this)" class="button">MODULE FEEDBACK</button>
+                            <button onclick="minimise(this)" class="button">MINIMISE</button>
                         </div>   
                    </div>
 
                     <div class="module-dropdown">
-                        <div class="assessment">
+                        <!-- <div class="assessment">
                             <p > Coursework 1 </p>
                         </div>
                         <div class="assessment">
                             <p > Coursework 2 </p>
-                        </div>
+                        </div> -->
                         
                     </div>
                 </div>    
