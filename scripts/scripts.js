@@ -255,12 +255,12 @@ let setModuleName = function(node, nameofModule){
 }
 
 //this function sets the button to specific module
-let setAddAssessmentButton = function(node, nameofModule){
+let setDeleteModuleButton = function(node, nameofModule){
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.classList.add(`${nameofModule}-add-assessment-button`);
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.classList.add(`${nameofModule}`);
 }
 
-let setDeleteAssessmentButton = function(node, nameofModule){
+let setAddAssessmentButton = function(node, nameofModule){
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-delete-assessment-button`);
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
 }
@@ -312,60 +312,63 @@ let closeAssessmentPopup = function(){
     popup.classList.add("hide");
 };
 
-
-
-
-
 let saveModule = function(){
     //Get all the values for the new module
     let moduleName = document.querySelector("#module-name").value;
-    console.log(typeof moduleName);
 
-    //parse and store the name of module in new variable
-
+    //TODO: parse and store the name of module in new variable
     let moduleCode = document.querySelector("#module-code").value;
-    console.log(typeof moduleCode);
 
     let numOfAssessments = document.querySelector("#num-of-assessments").value;
-    console.log(typeof numOfAssessments);
 
     let credits = document.querySelector("#credits").value;
-    console.log(typeof credits);
 
     //Create a new module
     let new_module = new modules(moduleName, moduleCode, numOfAssessments, credits);
-
 
     //Close the popup
     let popup = document.querySelector(".add-module-popup-container");
     popup.classList.add("hide");
 
     //Add the new module to the list
-    let copy = node.cloneNode(true);
-    copy.classList.remove('original-module');
-
+    let newModule = node.cloneNode(true);
+    newModule.classList.remove('original-module');
+    newModule.setAttribute("id", `${moduleName}-module`);
+    // newModule.classList.add(`${moduleName}-module`);
+    
     //Set the class names for buttons of the new module
-    setModuleName(copy,moduleName);
-    setAddAssessmentButton(copy,moduleName);
-    setDeleteAssessmentButton(copy, moduleName);
-    setModuleDetailsButton(copy, moduleName);
-    setModuleFeedbackButton(copy, moduleName);
-    setMinimizeButton(copy, moduleName);
-    setModuleDropdownClassName(copy, moduleName);
+    setModuleName(newModule,moduleName);
+    setDeleteModuleButton(newModule,moduleName);
+    setAddAssessmentButton(newModule, moduleName);
+    setModuleDetailsButton(newModule, moduleName);
+    setModuleFeedbackButton(newModule, moduleName);
+    setMinimizeButton(newModule, moduleName);
+    setModuleDropdownClassName(newModule, moduleName);
 
     let newElement = document.createElement("div");
     newElement.setAttribute("class", "module" );
 
-    modulesContainer.appendChild(copy);
+    modulesContainer.appendChild(newModule);
 }
 
+//Delete the selected module that was clicked on
+let deleteModule = function(element){
+    let moduleName = element.classList[3];
+    let moduleToDelete = document.querySelector(`#${moduleName}-module`);
+
+    let modulesContainer = document.querySelector(".modules-container");
+    console.log(modulesContainer);
+
+    //Delete the selected module
+    modulesContainer.removeChild(moduleToDelete);
+}
 //Delete Module
 let deleteModuleButton = document.querySelector(".delete-module-button");
 deleteModuleButton.addEventListener("click", function(){
     // modulesContainer.style.backgroundColor = "red";
     let node_list = document.querySelectorAll(".module");
     let last =node_list[node_list.length -1];
-    modulesContainer.removeChild(last);
+    node_list.removeChild(last);
 });
 
 let saveAssessment = function() {
@@ -387,33 +390,22 @@ let saveAssessment = function() {
     let newElement = document.createElement("div");
     let text = document.createTextNode(assessmentName);
     let deleteButton = document.createElement("button");
-    deleteButton.classList.add("button", "cancel-button");
+    deleteButton.classList.add("button", "cancel-button", `${moduleName}-delete-assessment-button`, `${moduleName}`, `${moduleName}-${assessmentName}`);
+    deleteButton.setAttribute("onclick", "deleteAssessment(this)");
     deleteButton.textContent = "DELETE ASSESSMENT";
-
 
     //Append the text to the new element 
     newElement.appendChild(text);
     newElement.appendChild(deleteButton);
+    newElement.setAttribute("id", `${moduleName}-${assessmentName}`);
     newElement.setAttribute("class", "assessment" );
+
     newElement.classList.add(`${moduleName}-assessment`);
 
     //append new assessment to the dropdown
     modulesDropdown.appendChild(newElement);
 
-
-
-}
-
-let openAssessmentPopup = function(element){
-    let moduleName = element.classList[2];
-    console.log("This" + moduleName);
-
-    let popup = document.querySelector(".add-assessment-popup-container");
-    popup.classList.remove("hide");
-
-    let target = document.querySelector(".target-module");
-    target.textContent = moduleName;
-
+    closeAssessmentPopup();
 }
 
 //Add Assessement to module
@@ -421,25 +413,29 @@ let addAssessment = function(element){
 
     //Get the name of the class & the target dropdown
     let moduleName = element.classList[2];
-    let modulesDropdown = document.querySelector(`.${moduleName}-module-dropdown`);
 
-    //Open the panel and get the require information
-    openAssessmentPopup(element);
+    let popup = document.querySelector(".add-assessment-popup-container");
+    popup.classList.remove("hide");
+
+    let target = document.querySelector(".target-module");
+    target.textContent = moduleName;
 }
 
-//this funtion deletes an assessment from the list of assessments
+//this funtion deletes an assessment from the list of assessments for the specifc module
 let deleteAssessment = function(element){
-    //Get the name of the class & teh taget dropdown
+    //Get the name of the class, the target dropdown & id of the element to delete
     let moduleName = element.classList[3];
+    let assessementToDelete = element.classList[4];
     let modulesDropdown = document.querySelector(`.${moduleName}-module-dropdown`);
 
-    let node_list = document.querySelectorAll(`.${moduleName}-assessment`);
+    //Obtain the node of the element 
+    let node = document.querySelector(`#${assessementToDelete}`);
 
-    let last = node_list[node_list.length-1];
+    //Try to remove the node, if it can't log a message
     try{
-        modulesDropdown.removeChild(last);
+        modulesDropdown.removeChild(node);
     }catch(e){
-        console.log("Error: There are no assessments to delete!");
+        console.log("Error: Cannot remove assessment!");
     }
     
 }
