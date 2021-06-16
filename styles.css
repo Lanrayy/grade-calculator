@@ -162,6 +162,13 @@ input:focus {
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.assessment button {
+  font-size: 10px;
+  width: 130px;
+  height: 24px;
 }
 
 .hide {

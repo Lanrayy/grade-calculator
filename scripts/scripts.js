@@ -370,9 +370,14 @@ let addAssessment = function(element){
     ///Create a new div assessment element and add text to the element
     let newElement = document.createElement("div");
     let text = document.createTextNode("Coursework");
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("button", "cancel-button");
+    deleteButton.textContent = "DELETE ASSESSMENT";
+
 
     //Append the text to the new element 
     newElement.appendChild(text);
+    newElement.appendChild(deleteButton);
     newElement.setAttribute("class", "assessment" );
     newElement.classList.add(`${moduleName}-assessment`);
 
@@ -414,6 +419,5 @@ let minimise = function(element){
     let dropdown= document.querySelector(`.${moduleName}-module-dropdown`);
     dropdown.classList.toggle("hide");
 }
-
 
 
