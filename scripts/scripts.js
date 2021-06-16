@@ -328,10 +328,10 @@ let saveModule = function(){
     let numOfAssessments = document.querySelector("#num-of-assessments").value;
     let credits = document.querySelector("#credits").value;
 
-    if(userModuleName == "" || moduleCode == "" || numOfAssessments == "" || credits == ""){
-        alert("Please check all the fields and ensure you enter valid values!");
-        return 0;
-    }
+    // if(userModuleName == "" || moduleCode == "" || numOfAssessments == "" || credits == ""){
+    //     alert("Please check all the fields and ensure you enter valid values!");
+    //     return 0;
+    // }
 
     //Create a new module
     modulesList[`${moduleName}`]= new modules(moduleName, moduleCode, numOfAssessments, credits); 
@@ -377,6 +377,22 @@ let deleteModule = function(element){
     delete modulesList[`${moduleName}`];
 };
 
+//This function opens the add module panel when the add assessment button is clicked
+let addAssessment = function(element){
+    //Get the name of the class & the target dropdown
+    let moduleName = element.classList[2];
+
+    let assessmentNameInput = document.querySelector("#assessment-name");
+    assessmentNameInput.textContent = `coursework_${numberOfAssessmentTaken}"`;
+
+    let popup = document.querySelector(".add-assessment-popup-container");
+    popup.classList.remove("hide");
+
+    let target = document.querySelector(".target-module");
+    target.textContent = moduleName;
+}
+
+
 let numberOfAssessmentTaken = 1;
 //this fucntion adds the assessment to the list
 let saveAssessment = function() {
@@ -410,14 +426,20 @@ let saveAssessment = function() {
 
     //Create a button and add it to the element
     let newElement = document.createElement("div");
-    let text = document.createTextNode(userAssessmentName);
+    let text = document.createTextNode(`${userAssessmentName}( ${worth}% ): `);
     let deleteButton = document.createElement("button");
     deleteButton.classList.add("button", "cancel-button", `${moduleName}-delete-assessment-button`, `${moduleName}`, `${moduleName}-${assessmentName}`, `${assessmentName}`);
     deleteButton.setAttribute("onclick", "deleteAssessment(this)");
     deleteButton.textContent = "DELETE ASSESSMENT";
+    console.log();
+
+    //Create the node with the assesment information
+    let details = ` [   Your got:  ${score} out of ${totalMarks} | ${modulesList[`${moduleName}`]["assessments"][assessmentName]["percent"]}%]`;
+    let asssessmentDetails = document.createTextNode(details);
 
     //Append the text to the new element 
     newElement.appendChild(text);
+    newElement.appendChild(asssessmentDetails);
     newElement.appendChild(deleteButton);
     newElement.setAttribute("id", `${moduleName}-${assessmentName}`);
     newElement.setAttribute("class", "assessment" );
@@ -429,20 +451,7 @@ let saveAssessment = function() {
     closeAssessmentPopup();
 }
 
-//This function opens the add module panel when the add assessment button is clicked
-let addAssessment = function(element){
-    //Get the name of the class & the target dropdown
-    let moduleName = element.classList[2];
 
-    let assessmentNameInput = document.querySelector("#assessment-name");
-    assessmentNameInput.textContent = `coursework_${numberOfAssessmentTaken}"`;
-
-    let popup = document.querySelector(".add-assessment-popup-container");
-    popup.classList.remove("hide");
-
-    let target = document.querySelector(".target-module");
-    target.textContent = moduleName;
-}
 
 //this funtion deletes the clicked assessment from the list of assessments for the specifc module
 let deleteAssessment = function(element){
@@ -479,12 +488,15 @@ let moduleDetails = function(element){
     let moduleName = element.classList[2];
     modulesList[`${moduleName}`].moduleDetails();
     console.log(modulesList);
+    
 }
 
 //This funtion will provide feedback to the user about the module.
 let moduleFeedback = function(element){
     let moduleName = element.classList[2];
     modulesList[`${moduleName}`].feedback();
+
+
 }
 
 //this function, minimises the module dropdown list
@@ -496,4 +508,6 @@ let minimise = function(element){
     let dropdown= document.querySelector(`.${moduleName}-module-dropdown`);
     dropdown.classList.toggle("hide");
 }
+
+
 
