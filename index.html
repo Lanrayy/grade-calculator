@@ -54,8 +54,9 @@
             <div class="popup-title"><h1>Add Assessment</h1></div>
             <p class="target-module hide"></p>
             <div class="popup-input-container">
-                <label for="assessment-name">Assessment Name:</label>
+                <label for="assessment-name">Assessment Name: &nbsp; </label>
                 <input type="text" id="assessment-name" placeholder="Enter assessment name..."/>
+                <!-- <div id="assessment-name"> </div> -->
             </div>
 
             <div class="popup-input-container">
@@ -103,7 +104,8 @@
                 <!-- Module Template -->
                 <div class="module original-module">
                     <div class="module-details">
-                       <p class="module-name">Module Name</p> 
+                       <p class="module-name">Module Name</p>
+                       
                        <div class="module-buttons">
                             <button onclick="deleteModule(this)" class="button cancel-button">DELETE MODULE</button>
                             <button onclick="addAssessment(this)" class="button">ADD ASSESSMENT</button> 
