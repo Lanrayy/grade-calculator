@@ -248,6 +248,9 @@ console.log("****Feedback****");
 databases.feedback();
 console.log("\n");
 
+
+let modulesList = {};
+
 //Additional methods
 //this function sets the button to specific module
 
@@ -322,7 +325,8 @@ let saveModule = function(){
     let credits = document.querySelector("#credits").value;
 
     //Create a new module
-    sampleModule = new modules(moduleName, moduleCode, numOfAssessments, credits);
+    modulesList[`${moduleName}`]= new modules(moduleName, moduleCode, numOfAssessments, credits); 
+    // sampleModule = new modules(moduleName, moduleCode, numOfAssessments, credits);
 
     //Close the popup
     let popup = document.querySelector(".add-module-popup-container");
@@ -384,7 +388,8 @@ let saveAssessment = function() {
     console.log(totalMarks);
     console.log(worth);
 
-    sampleModule.addAssessment(assessmentName, score, totalMarks, worth);
+
+    modulesList[`${moduleName}`].addAssessment(assessmentName, score, totalMarks, worth);
 
 
     let newElement = document.createElement("div");
@@ -403,7 +408,7 @@ let saveAssessment = function() {
 
     //append new assessment to the dropdown
     modulesDropdown.appendChild(newElement);
-
+    console.log(modulesList);
     closeAssessmentPopup();
 }
 
@@ -441,15 +446,17 @@ let deleteAssessment = function(element){
     
 }
 
-//TODO: 
+//This funtion will provide information to the user about the module.
 let moduleDetails = function(element){
-    sampleModule.moduleDetails();
+    let moduleName = element.classList[2];
+    modulesList[`${moduleName}`].moduleDetails();
 }
 
-//TODO:
+//This funtion will provide feedback to the user about the module.
 let moduleFeedback = function(element){
-    sampleModule.feedback();
-
+    let moduleName = element.classList[2];
+    modulesList[`${moduleName}`].feedback();
+    
 }
 
 //this function, minimises the module dropdown list
