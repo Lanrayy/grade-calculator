@@ -358,18 +358,9 @@ let deleteModule = function(element){
 
     let modulesContainer = document.querySelector(".modules-container");
     console.log(modulesContainer);
-
     //Delete the selected module
     modulesContainer.removeChild(moduleToDelete);
-}
-//Delete Module
-let deleteModuleButton = document.querySelector(".delete-module-button");
-deleteModuleButton.addEventListener("click", function(){
-    // modulesContainer.style.backgroundColor = "red";
-    let node_list = document.querySelectorAll(".module");
-    let last =node_list[node_list.length -1];
-    node_list.removeChild(last);
-});
+};
 
 let saveAssessment = function() {
     let moduleName = document.querySelector(".target-module").textContent;
@@ -410,7 +401,6 @@ let saveAssessment = function() {
 
 //Add Assessement to module
 let addAssessment = function(element){
-
     //Get the name of the class & the target dropdown
     let moduleName = element.classList[2];
 

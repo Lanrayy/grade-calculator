@@ -25,6 +25,7 @@ body {
 
 .button:hover {
   background-color: #38932c;
+  cursor: pointer;
 }
 
 .cancel-button:hover {
