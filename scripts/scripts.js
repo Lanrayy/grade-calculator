@@ -252,23 +252,108 @@ console.log("\n");
 
 
 
+//Additional methods
+//this function sets the button to specific module
+let setModuleName = function(node, nameofModule){
+    node.firstChild.nextSibling.firstChild.nextSibling.textContent = nameofModule;
+}
+
+//this function sets the button to specific module
+let setAddAssessmentButton = function(node, nameofModule){
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.classList.add(`${nameofModule}-add-assessment-button`);
+}
+
+let setDeleteAssessmentButton = function(node, nameofModule){
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-delete-assessment-button`);
+}
+let setModuleDetailsButton = function(node, nameofModule){
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-module-details-button`);
+}
+
+let setModuleFeedbackButton = function(node, nameofModule){
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-module-feedback-button`);
+}
+
+let setMinimizeButton = function(node, nameofModule){
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-minimise-button`);
+}
+
+let setModuleDropdownClassName = function(node, nameofModule){
+    node.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-module-dropdown`);
+}
 
 //Main program
 // console.log(document.getElementById("main").textContent);
 
-let addModuleButton = document.querySelector(".add-module-button");
+
 let modulesContainer = document.querySelector(".modules-container");
-let addAssessmentButton = document.querySelector(".add-assessment-button");
 let node = document.querySelector(".original-module");
+console.log(node.firstChild.nextSibling.nextSibling.nextSibling);
 
 //Add Module
+let addModuleButton = document.querySelector(".add-module-button");
 addModuleButton.addEventListener("click", function(){
+    let popup = document.querySelector(".add-module-pop-up-container");
+    popup.classList.remove("hide");
+
+});
+
+//Add Module Popup Cancel button
+let popupCancelButton = document.querySelector("#popup-cancel-button");
+popupCancelButton.addEventListener("click", function(){
+    let popup = document.querySelector(".add-module-pop-up-container");
+    popup.classList.add("hide");
+})
+
+//Add Module Popup Save button
+let popupSaveButton = document.querySelector("#popup-save-button");
+popupSaveButton.addEventListener("click", function(){
+    //Get all the values for the new module
+    let moduleName = document.querySelector("#module-name").value;
+    console.log(typeof moduleName);
+
+    //parse and stotre the name of module in new variable
+
+    let moduleCode = document.querySelector("#module-code").value;
+    console.log(typeof moduleCode);
+
+    let numOfAssessments = document.querySelector("#num-of-assessments").value;
+    console.log(typeof numOfAssessments);
+
+    let credits = document.querySelector("#credits").value;
+    console.log(typeof credits);
+
+    //Create a new module
+
+    let new_module = new modules(moduleName, moduleCode, numOfAssessments, credits);
+
+    //Display that information in the new module in the HTML page
+
+
+    //Close the popup
+    let popup = document.querySelector(".add-module-pop-up-container");
+    popup.classList.add("hide");
+
+    //Add the new module to the list
     let copy = node.cloneNode(true);
-    // modulesContainer.style.backgroundColor = "red";
+
+    //Set the class names for buttons of the new module
+    setModuleName(copy,moduleName);
+    setAddAssessmentButton(copy,moduleName);
+    setDeleteAssessmentButton(copy, moduleName);
+    setModuleDetailsButton(copy, moduleName);
+    setModuleFeedbackButton(copy, moduleName);
+    setMinimizeButton(copy, moduleName);
+    setModuleDropdown(copy, moduleName);
+
     let newElement = document.createElement("div");
     newElement.setAttribute("class", "module" );
+
+    
     modulesContainer.appendChild(copy);
-});
+})
+
+
 
 //Delete Module
 let deleteModuleButton = document.querySelector(".delete-module-button");
@@ -281,8 +366,16 @@ deleteModuleButton.addEventListener("click", function(){
 
 
 //Add Assessement to module
+
+let button = document.querySelector("click", function(){
+
+});
+
+let addAssessmentButton = document.querySelector(".add-assessment-button");
 let modulesDropdown = document.querySelector(".module-dropdown");
 addAssessmentButton.addEventListener("click", function(){
+    console.log(this.classList);
+
     // modulesContainer.style.backgroundColor = "red";
     let newElement = document.createElement("div");
     let text = document.createTextNode("Coursework");
@@ -308,3 +401,6 @@ minimiseButton.addEventListener("click", function(){
 
     dropdown.classList.toggle("hide");
 });
+
+
+
