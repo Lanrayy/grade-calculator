@@ -70,7 +70,8 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
         let numOfCurrentAssessments = this.calcNumOfAssessments();
 
         if(this.numOfAssessments - numOfCurrentAssessments <= 0){
-            console.log("You have already added the maximum number of assessments");
+            // console.log("You have already added the maximum number of assessments");
+            alert("You have already added the maximum number of assessments");
             return 0;
         }
 
@@ -328,10 +329,10 @@ let saveModule = function(){
     let numOfAssessments = document.querySelector("#num-of-assessments").value;
     let credits = document.querySelector("#credits").value;
 
-    // if(userModuleName == "" || moduleCode == "" || numOfAssessments == "" || credits == ""){
-    //     alert("Please check all the fields and ensure you enter valid values!");
-    //     return 0;
-    // }
+    if(userModuleName == "" || moduleCode == "" || numOfAssessments == "" || credits == ""){
+        alert("Please check all the fields and ensure you enter valid values!");
+        return 0;
+    }
 
     //Create a new module
     modulesList[`${moduleName}`]= new modules(moduleName, moduleCode, numOfAssessments, credits); 
@@ -400,9 +401,11 @@ let saveAssessment = function() {
     
     let modulesDropdown = document.querySelector(`.${moduleName}-module-dropdown`); 
 
+    
     //Get the datails of teh assessment to be added for the module object
+    console.log(numberOfAssessmentTaken);
     let assessmentName = `assessment_${numberOfAssessmentTaken}`;
-    numberOfAssessmentTaken++;
+    
 
     //Get the details the user enters and parse it
     let userAssessmentName = document.querySelector("#assessment-name").value;
@@ -431,7 +434,6 @@ let saveAssessment = function() {
     deleteButton.classList.add("button", "cancel-button", `${moduleName}-delete-assessment-button`, `${moduleName}`, `${moduleName}-${assessmentName}`, `${assessmentName}`);
     deleteButton.setAttribute("onclick", "deleteAssessment(this)");
     deleteButton.textContent = "DELETE ASSESSMENT";
-    console.log();
 
     //Create the node with the assesment information
     let details = ` [   Your got:  ${score} out of ${totalMarks} | ${modulesList[`${moduleName}`]["assessments"][assessmentName]["percent"]}%]`;
@@ -448,6 +450,7 @@ let saveAssessment = function() {
     //append new assessment to the dropdown
     modulesDropdown.appendChild(newElement);
     console.log(modulesList);
+    numberOfAssessmentTaken++;
     closeAssessmentPopup();
 }
 
@@ -488,15 +491,12 @@ let moduleDetails = function(element){
     let moduleName = element.classList[2];
     modulesList[`${moduleName}`].moduleDetails();
     console.log(modulesList);
-    
 }
 
 //This funtion will provide feedback to the user about the module.
 let moduleFeedback = function(element){
     let moduleName = element.classList[2];
     modulesList[`${moduleName}`].feedback();
-
-
 }
 
 //this function, minimises the module dropdown list
