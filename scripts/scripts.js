@@ -94,15 +94,31 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
     calcWeightedAverage(){
         let currentNumOfAssessments = this.calcNumOfAssessments();
 
-        let weightedAverage = 0;
-        for(let i = 0; i < currentNumOfAssessments; i++){
-            let grade = this.assessments[`assessment_${i+1}`].percent;
+        // let weightedAverage = 0;
+        // for(let i = 0; i < currentNumOfAssessments; i++){
+        //     let grade = this.assessments[`assessment_${i+1}`].percent;
             
-            let worth = this.assessments[`assessment_${i+1}`].worth;
-            worth /= 100;
+        //     let worth = this.assessments[`assessment_${i+1}`].worth;
+        //     worth /= 100;
 
-            weightedAverage += (grade * worth);
+        //     weightedAverage += (grade * worth);
+        //     console.log(weightedAverage);
+        // }
+
+        //Get the weighted sum of all the current assessements
+        let weightedAverage = 0;
+        for(let assessment_name in this.assessments){
+            // console.log(this.assessments[assessment_name]["percent"]);
+
+            let grade = this.assessments[assessment_name]["percent"];
+            let worth = this.assessments[assessment_name]["worth"];
+            worth = worth / 100;
+
+            weightedAverage += (grade * worth)
+            console.log(weightedAverage);
         }
+
+
         weightedAverage = Number(weightedAverage.toFixed(2));
         this.average = weightedAverage;
 
@@ -141,7 +157,7 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
         //Calculate the marks need for a first using the weighted average
         //Show it to the user
         console.log(`Sum: ${sumOfTakenAssessements}`);
-        console.log(`Worth of final assessmet: ${worthOfFinalAssessment}`);
+        console.log(`Worth of final assessment: ${worthOfFinalAssessment}`);
 
         let marksForAFirst = ((70 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
         console.log(marksForAFirst);
@@ -149,14 +165,27 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
         if(marksForAFirst <= 0){
             console.log("You have already achieved a first");
         }else{
-            console.log(`You need to get at least ${marksForAFirst}%,${modules.calcGrade(marksForAFirst)}in the final assessment in order to get a first`);
+
+            if(marksForAFirst > worthOfFinalAssessment){
+                console.log("Unfortunately, you cannot get a first in this module.");
+            }
+            else{
+                console.log(`You need to get at least ${marksForAFirst}%,${modules.calcGrade(marksForAFirst)}in the final assessment in order to get a first`);
+            }
+            
         }
 
         let marksForATwoOne = ((60 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
+        console.log(marksForATwoOne);
         if(marksForATwoOne <= 0){
             console.log("You have already achieved a 2.1");
         }else{
-            console.log(`You need to get at least ${marksForATwoOne}%,${modules.calcGrade(marksForATwoOne)}in the final assessment in order to get a 2.1`);
+            if(marksForATwoOne > worthOfFinalAssessment){
+                console.log("Unfortunately, you cannot get a 2.1 in this module.");
+            }
+            else{
+                console.log(`You need to get at least ${marksForATwoOne}%,${modules.calcGrade(marksForATwoOne)}in the final assessment in order to get a 2.1`);
+            }
         }
 
         let marksForATwoTwo = ((50 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
@@ -164,7 +193,12 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
             console.log("You have already achieved a 2.2");
         }
         else{
-            console.log(`You need to get at least ${marksForATwoTwo}%,${modules.calcGrade(marksForATwoTwo)}in the final assessment in order to get a 2.2`);
+            if(marksForATwoTwo > worthOfFinalAssessment){
+                console.log("Unfortunately, you cannot get a 2.2 in this module.");
+            }
+            else{
+                console.log(`You need to get at least ${marksForATwoTwo}%,${modules.calcGrade(marksForATwoTwo)}in the final assessment in order to get a 2.2`);
+            }
         }
         
         let marksForAPass = ((40 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
@@ -244,9 +278,12 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
 let databases = new modules("Databases", "COMP1121", 4, 10);
 
 //Programming for the web
-databases.addAssessment("assessment_1", 10, 10, 10);
-databases.addAssessment("assessment_2", 29, 30, 20);
-databases.addAssessment("assessment_3", 20, 30, 30);
+databases.addAssessment("assessment_1", 5, 10, 20);
+databases.addAssessment("assessment_2", 10, 20, 10);
+databases.addAssessment("assessment_3", 5, 20, 10);
+databases.feedback();
+
+databases.calcNumOfAssessments();
 // databases.addAssessment("coursework_4", 14, 16, 10);
 
 console.log("****Feedback****");
@@ -367,15 +404,22 @@ let saveModule = function(){
 
 //Delete the selected module that was clicked on
 let deleteModule = function(element){
-    let moduleName = element.classList[3];
-    let moduleToDelete = document.querySelector(`#${moduleName}-module`);
+    //confirm if user wants to delete module
+    let answer = prompt("Are you sure you want to delete this module? (y/n)");
 
-    let modulesContainer = document.querySelector(".modules-container");
-    console.log(modulesContainer);
-    //Delete the selected module
-    modulesContainer.removeChild(moduleToDelete);
+    if(answer[0] == "y"){
+        let moduleName = element.classList[3];
+        let moduleToDelete = document.querySelector(`#${moduleName}-module`);
 
-    delete modulesList[`${moduleName}`];
+        let modulesContainer = document.querySelector(".modules-container");
+        console.log(modulesContainer);
+        //Delete the selected module
+        modulesContainer.removeChild(moduleToDelete);
+
+        delete modulesList[`${moduleName}`];
+    }
+
+    
 };
 
 //This function opens the add module panel when the add assessment button is clicked
@@ -384,7 +428,7 @@ let addAssessment = function(element){
     let moduleName = element.classList[2];
 
     let assessmentNameInput = document.querySelector("#assessment-name");
-    assessmentNameInput.textContent = `coursework_${numberOfAssessmentTaken}"`;
+    assessmentNameInput.textContent = `coursework_${numberOfAssessmentsTaken}"`;
 
     let popup = document.querySelector(".add-assessment-popup-container");
     popup.classList.remove("hide");
@@ -394,25 +438,26 @@ let addAssessment = function(element){
 }
 
 
-let numberOfAssessmentTaken = 1;
+let numberOfAssessmentsTaken = 1;
 //this fucntion adds the assessment to the list
 let saveAssessment = function() {
+    // Get the module name and the dropdown name
     let moduleName = document.querySelector(".target-module").textContent;
-    
     let modulesDropdown = document.querySelector(`.${moduleName}-module-dropdown`); 
 
-    
-    //Get the datails of teh assessment to be added for the module object
-    console.log(numberOfAssessmentTaken);
-    let assessmentName = `assessment_${numberOfAssessmentTaken}`;
+    //Get the number of elements in the dropdown
+
+    //Get the datails of the assessment to be added for the module object
+    console.log(numberOfAssessmentsTaken);
+
+    let assessmentName = `assessment_${numberOfAssessmentsTaken}`;
     
 
     //Get the details the user enters and parse it
     let userAssessmentName = document.querySelector("#assessment-name").value;
-    let score = document.querySelector("#score").value;
-    let totalMarks = document.querySelector("#total-marks").value;
+    let score = Number(document.querySelector("#score").value);
+    let totalMarks = Number(document.querySelector("#total-marks").value);
     let worth = document.querySelector("#worth").value;
-
 
     if(userAssessmentName == "" || score == "" || totalMarks == "" || worth == "" || worth > 100 || score > totalMarks){
         alert("Please check all the fields and ensure you enter valid values!");
@@ -450,7 +495,7 @@ let saveAssessment = function() {
     //append new assessment to the dropdown
     modulesDropdown.appendChild(newElement);
     console.log(modulesList);
-    numberOfAssessmentTaken++;
+    numberOfAssessmentsTaken++;
     closeAssessmentPopup();
 }
 
