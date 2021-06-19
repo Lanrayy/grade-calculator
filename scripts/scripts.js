@@ -71,7 +71,7 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
 
         if(this.numOfAssessments - numOfCurrentAssessments <= 0){
             // console.log("You have already added the maximum number of assessments");
-            alert("You have already added the maximum number of assessments");
+            // alert("You have already added the maximum number of assessments");
             return 0;
         }
 
@@ -469,37 +469,46 @@ let saveAssessment = function() {
     console.log(totalMarks);
     console.log(worth);
 
-    //Add the assessement to the specific module
-    modulesList[`${moduleName}`].addAssessment(assessmentName, score, totalMarks, worth);
+    let numberOfAssessmentsAdded = modulesList[`${moduleName}`].calcNumOfAssessments();
+    console.log(numberOfAssessmentsAdded);
+    let numOfAssessments = Number(modulesList[`${moduleName}`]["numOfAssessments"]);
+    console.log(numOfAssessments);
 
-    //Create a button and add it to the element
-    let newElement = document.createElement("div");
-    let text = document.createTextNode(`${userAssessmentName}( ${worth}% ): `);
-    let deleteButton = document.createElement("button");
-    deleteButton.classList.add("button", "cancel-button", `${moduleName}-delete-assessment-button`, `${moduleName}`, `${moduleName}-${assessmentName}`, `${assessmentName}`);
-    deleteButton.setAttribute("onclick", "deleteAssessment(this)");
-    deleteButton.textContent = "DELETE ASSESSMENT";
+    //Check if the number of assessments already added is less than the total number of assessments
+    if(numberOfAssessmentsAdded < numOfAssessments){
+        //Add the assessement to the specific module
+        modulesList[`${moduleName}`].addAssessment(assessmentName, score, totalMarks, worth);
 
-    //Create the node with the assesment information
-    let details = ` [   Your got:  ${score} out of ${totalMarks} | ${modulesList[`${moduleName}`]["assessments"][assessmentName]["percent"]}%]`;
-    let asssessmentDetails = document.createTextNode(details);
+        //Create a button and add it to the element
+        let newElement = document.createElement("div");
+        let text = document.createTextNode(`${userAssessmentName}( ${worth}% ): `);
+        let deleteButton = document.createElement("button");
+        deleteButton.classList.add("button", "cancel-button", `${moduleName}-delete-assessment-button`, `${moduleName}`, `${moduleName}-${assessmentName}`, `${assessmentName}`);
+        deleteButton.setAttribute("onclick", "deleteAssessment(this)");
+        deleteButton.textContent = "DELETE ASSESSMENT";
 
-    //Append the text to the new element 
-    newElement.appendChild(text);
-    newElement.appendChild(asssessmentDetails);
-    newElement.appendChild(deleteButton);
-    newElement.setAttribute("id", `${moduleName}-${assessmentName}`);
-    newElement.setAttribute("class", "assessment" );
-    newElement.classList.add(`${moduleName}-assessment`);
+        //Create the node with the assesment information
+        let details = ` [   Your got:  ${score} out of ${totalMarks} | ${modulesList[`${moduleName}`]["assessments"][assessmentName]["percent"]}%]`;
+        let asssessmentDetails = document.createTextNode(details);
 
-    //append new assessment to the dropdown
-    modulesDropdown.appendChild(newElement);
-    console.log(modulesList);
-    numberOfAssessmentsTaken++;
-    closeAssessmentPopup();
+        //Append the text to the new element 
+        newElement.appendChild(text);
+        newElement.appendChild(asssessmentDetails);
+        newElement.appendChild(deleteButton);
+        newElement.setAttribute("id", `${moduleName}-${assessmentName}`);
+        newElement.setAttribute("class", "assessment" );
+        newElement.classList.add(`${moduleName}-assessment`);
+
+        //append new assessment to the dropdown
+        modulesDropdown.appendChild(newElement);
+        console.log(modulesList);
+        numberOfAssessmentsTaken++;
+        closeAssessmentPopup();
+    }
+    else{
+        alert("You have already added the maximum number of assessments!");
+    }
 }
-
-
 
 //this funtion deletes the clicked assessment from the list of assessments for the specifc module
 let deleteAssessment = function(element){

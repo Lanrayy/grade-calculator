@@ -96,10 +96,12 @@ input:focus {
   justify-content: space-between;
   align-items: center;
 }
+
 .logo {
   width: 170px;
   margin-right: 20px;
 }
+
 .welcome-message {
   font-size: 30px;
   font-weight: 600;
