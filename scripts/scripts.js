@@ -217,6 +217,8 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
 
     //this method will provide complete/overall feedback to the user about the module.
     feedback(){
+
+        let output = "";
         //Before providing Feedback Calculate the average
         this.calcWeightedAverage();
 
@@ -227,8 +229,12 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
             console.log("No assessments left");
 
             if(this.average >= 70){
-                console.log(`Your final mark is ${(Math.trunc(this.average))}% and your final grade is a first`);
+                output += `Your final mark is ${(Math.trunc(this.average))}% and your final grade is a first\n`;
+                console.log(output);
+                
+
             } else if(this.average >= 60 && this.average < 70){
+                output 
                 console.log(`Your final mark is ${(Math.trunc(this.average))}% and your final grade is a 2.1`);
                 
             }else if(this.average >= 50 && this.average < 60){
@@ -248,8 +254,10 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
             //if average is first, tell user that they have already achieved a first.
             if(this.average >= 70)
             {
-                console.log(`Your current mark is ${this.average}% and you currently have a first.`);
+                output = `Your current mark is ${this.average}% and you currently have a first.`;
+                console.log(output);
                 this.getWeightedProjections(this.average);
+
             } 
             // if they have a 2.1 tell them how much they need to get a first on the last assessement.
             else if(this.average >= 60 && this.average < 70)
@@ -271,7 +279,10 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
             console.log(`Your current mark is ${(this.average)}%.`);
             console.log("You need to add more assessements to get better insights.");
         }
+        return output;
     }
+
+    
 }
 
 // Tests
@@ -347,6 +358,11 @@ let closeModulePopup = function(){
 
 let closeAssessmentPopup = function(){
     let popup = document.querySelector(".add-assessment-popup-container");
+    popup.classList.add("hide");
+};
+
+let closeModuleFeedbackPopup = function(){
+    let popup = document.querySelector(".module-feedback-popup-container");
     popup.classList.add("hide");
 };
 
@@ -549,8 +565,23 @@ let moduleDetails = function(element){
 
 //This funtion will provide feedback to the user about the module.
 let moduleFeedback = function(element){
+
+    //get feedback
     let moduleName = element.classList[2];
     modulesList[`${moduleName}`].feedback();
+    let moduleFeedbackDetails;
+
+
+    //show the module feedback popup
+    let popup = document.querySelector(".module-feedback-popup-container");
+    popup.classList.remove("hide");
+
+    //put feedback into popup
+    let feedback = document.createTextNode(moduleFeedbackDetails);
+    let target = document.querySelector(".feedback");
+    // let target = document.querySelector(".module-details-container");
+    target.textContent = "This is the feedback";
+
 }
 
 //this function, minimises the module dropdown list
