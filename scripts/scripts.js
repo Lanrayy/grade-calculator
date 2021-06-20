@@ -61,8 +61,10 @@ class modules{
     //methods
     //returns a string representation of the fields in the object
     moduleDetails(){
-        console.log(`Databases ${this.moduleCode} is worth ${this.credits} credits and has ${this.numOfAssessments} assessments.
-You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
+
+        let output = `Databases ${this.moduleCode} is worth ${this.credits} credits and has ${this.numOfAssessments} assessments.<br/>\nYou have done already done ${this.calcNumOfAssessments()} asssessment(s).`;
+        console.log(output);
+        return output;
     };
 
     //this method adds a new assessment to the module
@@ -155,9 +157,11 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
 
         let currentNumOfAssessments = this.calcNumOfAssessments();
         let sumOfTakenAssessements = 0;
-        for(let i = 0; i < currentNumOfAssessments; i++){
-            sumOfTakenAssessements += Number(this.assessments[`assessment_${i+1}`].worth);
+
+        for(let assessment_name in this.assessments){
+            sumOfTakenAssessements += Number(this.assessments[assessment_name]["worth"]);
         }
+
         let worthOfFinalAssessment = 100 - sumOfTakenAssessements;
 
         //Calculate the marks need for a first using the weighted average
@@ -165,80 +169,81 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
         console.log(`Sum: ${sumOfTakenAssessements}`);
         console.log(`Worth of final assessment: ${worthOfFinalAssessment}`);
 
-        let marksForAFirst = ((70 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
-        console.log(marksForAFirst);
+        let percentForAFirst = ((70 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
+        console.log(percentForAFirst);
         //if the marks needed for a first is less than zero, then the student has ahieved a first already regardless of the result of the final assessment. 
-        if(marksForAFirst <= 0){
+        if(percentForAFirst <= 0){
             weightedFeedbackForFirst = "You have already achieved a first <br/>";
             console.log(weightedFeedbackForFirst);
             output += weightedFeedbackForFirst;
         }else{
 
-            if(marksForAFirst > worthOfFinalAssessment){
+            //Check if the percent needed for a first is greater that 100% of the full grade 
+            if(percentForAFirst  > 100){
                 weightedFeedbackForFirst = "Unfortunately, you cannot get a first in this module <br/>";
                 console.log(weightedFeedbackForFirst);
                 output += weightedFeedbackForFirst;
             }
             else{
-                weightedFeedbackForFirst = `You need to get at least ${marksForAFirst}%,${modules.calcGrade(marksForAFirst)}in the final assessment in order to get a first.<br/>`;
+                weightedFeedbackForFirst = `You need to get at least ${percentForAFirst}%,${modules.calcGrade(percentForAFirst)}in the final assessment in order to get a first.<br/>`;
                 console.log(weightedFeedbackForFirst);
                 output += weightedFeedbackForFirst;
             }
         }
 
-        let marksForATwoOne = ((60 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
-        console.log(marksForATwoOne);
-        if(marksForATwoOne <= 0){
+        let percentForATwoOne = ((60 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
+        console.log(percentForATwoOne);
+        if(percentForATwoOne <= 0){
             weightedFeedbackForTwoOne = "You have already achieved a 2.1.<br/>";
             console.log(weightedFeedbackForTwoOne);
             output += weightedFeedbackForTwoOne;
 
         }else{
-            if(marksForATwoOne > worthOfFinalAssessment){
+            if(percentForATwoOne > 100){
                 weightedFeedbackForTwoOne = "Unfortunately, you cannot get a 2.1 in this module.<br/>";
                 console.log(weightedFeedbackForTwoOne);
                 output += weightedFeedbackForTwoOne;
             }
             else{
-                weightedFeedbackForTwoOne = `You need to get at least ${marksForATwoOne}%,${modules.calcGrade(marksForATwoOne)}in the final assessment in order to get a 2.1.<br/>`;
+                weightedFeedbackForTwoOne = `You need to get at least ${percentForATwoOne}%,${modules.calcGrade(percentForATwoOne)}in the final assessment in order to get a 2.1.<br/>`;
                 console.log(weightedFeedbackForTwoOne);
                 output += weightedFeedbackForTwoOne
             }
         }
 
-        let marksForATwoTwo = ((50 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
-        if(marksForATwoTwo <= 0){
+        let percentForATwoTwo = ((50 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
+        if(percentForATwoTwo <= 0){
             weightedFeedbackForTwoTwo = "You have already achieved a 2.2.<br/>";
             console.log(weightedFeedbackForTwoTwo);
             output += weightedFeedbackForTwoTwo;
         }
         else{
-            if(marksForATwoTwo > worthOfFinalAssessment){
+            if(percentForATwoTwo > 100){
                 weightedFeedbackForTwoTwo = "Unfortunately, you cannot get a 2.2 in this module.<br/>";
                 console.log(weightedFeedbackForTwoTwo);
                 output += weightedFeedbackForTwoTwo;
             }
             else{
-                weightedFeedbackForTwoTwo = `You need to get at least ${marksForATwoTwo}%,${modules.calcGrade(marksForATwoTwo)}in the final assessment in order to get a 2.2<br/>`;
+                weightedFeedbackForTwoTwo = `You need to get at least ${percentForATwoTwo}%,${modules.calcGrade(percentForATwoTwo)}in the final assessment in order to get a 2.2<br/>`;
                 console.log(weightedFeedbackForTwoTwo);
                 output += weightedFeedbackForTwoTwo;
             }
         }
         
-        let marksForAPass = ((40 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
-        if(marksForAPass <= 0){
+        let percentForAPass = ((40 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
+        if(percentForAPass <= 0){
             weightedFeedbackForPass = "You have already passed<br/>";
             console.log(weightedFeedbackForPass);
             output += weightedFeedbackForPass;
         }
         else{
-            if(marksForAPass > 100){
+            if(percentForAPass > 100){
                 weightedFeedbackForPass = "Unfortunately, You cannot pass this module<br/>";
                 console.log(weightedFeedbackForPass);
                 output += weightedFeedbackForPass;
             }
             else{
-                weightedFeedbackForPass = `You need to get at least ${marksForAPass}%,${modules.calcGrade(marksForAPass)}in the final assessment in order to get a Pass<br/>`;
+                weightedFeedbackForPass = `You need to get at least ${percentForAPass}%,${modules.calcGrade(percentForAPass)}in the final assessment in order to get a Pass<br/>`;
                 console.log(weightedFeedbackForPass);
                 output += weightedFeedbackForPass;
             }
@@ -303,7 +308,7 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
                 console.log(output);
                 output += this.getWeightedProjections(this.average);
             }else if(this.average >= 40 && this.average < 50){
-                output += `Your current mark is ${this.average}% and you and currently have a third.<br/>`
+                output += `Your current mark is ${this.average}% and you and currently have a pass.<br/>`
                 console.log(output);
                 output += this.getWeightedProjections(this.average);
             } else{
@@ -329,9 +334,11 @@ You have done already done ${this.calcNumOfAssessments()} asssessment(s).`);
 let databases = new modules("Databases", "COMP1121", 4, 10);
 
 //Programming for the web
-databases.addAssessment("assessment_1", 5, 10, 20);
-databases.addAssessment("assessment_2", 10, 20, 10);
-databases.addAssessment("assessment_3", 5, 20, 10);
+databases.addAssessment("assessment_1", 10, 10, 10);
+databases.addAssessment("assessment_2", 19, 20, 20);
+databases.addAssessment("assessment_3", 20, 30, 30);
+// databases.addAssessment("assessment_4", 20.5, 40, 40);
+
 databases.feedback();
 
 databases.calcNumOfAssessments();
@@ -599,14 +606,19 @@ let deleteAssessment = function(element){
 //This funtion will provide information to the user about the module.
 let moduleDetails = function(element){
     let moduleName = element.classList[2];
-    modulesList[`${moduleName}`].moduleDetails();
-    let moduleDetailsInfo;
-
+    let moduleDetailsInfo = modulesList[`${moduleName}`].moduleDetails();
+    console.log(moduleDetailsInfo);
     console.log(modulesList);
+    return moduleDetailsInfo;
 }
 
 //This funtion will provide feedback to the user about the module.
 let moduleFeedback = function(element){
+    //Get module details
+    let moduleDetailsInfo = moduleDetails(element);
+    let targetDetails = document.querySelector(".details");
+
+    targetDetails.innerHTML = moduleDetailsInfo;
 
     //get feedback
     let moduleName = element.classList[2];
@@ -621,7 +633,7 @@ let moduleFeedback = function(element){
 
     //put feedback into popup
     // let feedback = document.createTextNode(moduleFeedbackDetails);
-    let target = document.querySelector(".feedback");
+    let targetFeedback = document.querySelector(".feedback");
     // let target = document.querySelector(".module-feedback-container");
     target.innerHTML = moduleFeedbackInfo;
     // target.appendChild(feedback);
