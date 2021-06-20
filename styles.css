@@ -301,3 +301,7 @@ input:focus {
   display: flex;
   opacity: 0.3;
 }
+
+.module-feedback-container {
+  margin-top: 10px;
+}

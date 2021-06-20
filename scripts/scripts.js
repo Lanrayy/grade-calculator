@@ -320,7 +320,7 @@ class modules{
         else{
             output += `Your current mark is ${(this.average)}%.<br/>`
             console.log(output);
-            output += "You need to add more assessements to get better insights.<br/>";
+            output += "You need to add/do more assessements to get better insights.<br/>";
             console.log(output);
             
         }
@@ -635,7 +635,7 @@ let moduleFeedback = function(element){
     // let feedback = document.createTextNode(moduleFeedbackDetails);
     let targetFeedback = document.querySelector(".feedback");
     // let target = document.querySelector(".module-feedback-container");
-    target.innerHTML = moduleFeedbackInfo;
+    targetFeedback.innerHTML = moduleFeedbackInfo;
     // target.appendChild(feedback);
     // feedback = "";
 
