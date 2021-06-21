@@ -102,6 +102,12 @@ input:focus {
   margin-right: 20px;
 }
 
+.logo:hover {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  filter: ;
+}
+
 .welcome-message {
   font-size: 30px;
   font-weight: 600;
