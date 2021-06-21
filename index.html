@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- ADD MODULE -->
     <div class="add-module-popup-container hide">
         <div class="add-module-popup">
             <div class="popup-title"><h1>Add Module</h1></div>
@@ -36,7 +37,7 @@
 
 
 
-            <div class="popup-buttons">
+            <div class="popup-buttons-container">
                 <button onclick="closeModulePopup()" class="button cancel-button popup-button">Cancel</button>
                 <button onclick="saveModule()" id="add-module-popup-save-button" class="button popup-button">Save</button>
             </div>
@@ -47,8 +48,6 @@
     </div>
 
         <!-- ADD ASSESSMENT CONTAINER -->
-
-
     <div class="add-assessment-popup-container hide">
         <div class="add-assessment-popup">
             <div class="popup-title"><h1>Add Assessment</h1></div>
@@ -74,7 +73,7 @@
                 <input type="number" id="worth"  placeholder="Enter the number of credits for module..." required/>
             </div>
 
-            <div class="popup-buttons">
+            <div class="popup-buttons-container">
                 <button onclick="closeAssessmentPopup()" class="button cancel-button popup-button">Cancel</button>
                 <button onclick="saveAssessment()" id="add-assesssment-popup-save-button" class="button popup-button">Save</button>
             </div>
@@ -83,13 +82,11 @@
         <div class="add-assessment-popup-overlay"></div>
     </div>
 
-    <!-- MODULE FEEDBACK -->
+
+    <!-- MODULE FEEDBACK POPUP -->
     <div class="module-feedback-popup-container hide">
         <div class="module-feedback-popup">
-            <div class="popup-buttons">
-                <button onclick="closeModuleFeedbackPopup()" class="button cancel-button popup-button">Cancel</button>
-            </div>
-
+            
             <div class="popup-title"><h1>Feedback </h1></div>
             <p class="target-module hide"></p>
 
@@ -104,7 +101,9 @@
                 <p class="feedback"></p>
             </div>
 
-            
+            <div class="popup-buttons-container">
+                <button onclick="closeModuleFeedbackPopup()" class="button cancel-button popup-button">Cancel</button>
+            </div>    
 
         </div>
         <div class="module-feedback-overlay"></div>
@@ -139,7 +138,6 @@
                        
                        <div class="module-buttons">
                            <button onclick="addAssessment(this)" class="button">ADD ASSESSMENT</button> 
-                           <button onclick="moduleDetails(this)" class="button">MODULE DETAILS</button>
                            <button onclick="moduleFeedback(this)" class="button">MODULE FEEDBACK</button>
                            <button onclick="minimise(this)" class="button">MINIMISE</button>
                            <button onclick="deleteModule(this)" class="button cancel-button">DELETE MODULE</button>

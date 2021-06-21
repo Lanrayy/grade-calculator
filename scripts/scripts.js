@@ -224,7 +224,7 @@ class modules{
                 output += weightedFeedbackForTwoTwo;
             }
             else{
-                weightedFeedbackForTwoTwo = `You need to get at least ${percentForATwoTwo}%,${modules.calcGrade(percentForATwoTwo)}in the final assessment in order to get a 2.2<br/>`;
+                weightedFeedbackForTwoTwo = `You need to get at least ${percentForATwoTwo}%,${modules.calcGrade(percentForATwoTwo)}in the final assessment in order to get a 2.2.<br/>`;
                 console.log(weightedFeedbackForTwoTwo);
                 output += weightedFeedbackForTwoTwo;
             }
@@ -238,12 +238,12 @@ class modules{
         }
         else{
             if(percentForAPass > 100){
-                weightedFeedbackForPass = "Unfortunately, You cannot pass this module<br/>";
+                weightedFeedbackForPass = "Unfortunately, You cannot pass this module.<br/>";
                 console.log(weightedFeedbackForPass);
                 output += weightedFeedbackForPass;
             }
             else{
-                weightedFeedbackForPass = `You need to get at least ${percentForAPass}%,${modules.calcGrade(percentForAPass)}in the final assessment in order to get a Pass<br/>`;
+                weightedFeedbackForPass = `You need to get at least ${percentForAPass}%,${modules.calcGrade(percentForAPass)}in the final assessment in order to get a Pass.<br/>`;
                 console.log(weightedFeedbackForPass);
                 output += weightedFeedbackForPass;
             }
@@ -265,29 +265,37 @@ class modules{
             console.log("No assessments left");
 
             if(this.average >= 70){
-                output += `Your final mark is ${(Math.trunc(this.average))}% and your final grade is a first<br/>`;
+                output += `Your final mark is ${(Math.trunc(this.average))}% and your final grade is a first.<br/>`;
                 console.log(output);
                 
             } else if(this.average >= 60 && this.average < 70){
-                output += `Your final mark is ${(Math.trunc(this.average))}% and your final grade is a 2.1<br/>`;
+                output += `Your final mark is ${(Math.trunc(this.average))}% and your final grade is a 2.1.<br/>`;
                 console.log(output);
                 
             }else if(this.average >= 50 && this.average < 60){
-                output += `Your final mark is ${(Math.trunc(this.average))}% and your final grade is a 2.2<br/>`;
+                output += `Your final mark is ${(Math.trunc(this.average))}% and your final grade is a 2.2.<br/>`;
                 console.log(output);
                 
             }else if(this.average >= 40 && this.average < 50){
-                output += `Your final mark is ${(Math.trunc(this.average))}% and your final grade is a Pass<br/>`
+                output += `Your final mark is ${(Math.trunc(this.average))}% and your final grade is a pass.<br/>`;
                 console.log(output);
             }else {
-                output += `Your final mark is ${(Math.trunc(this.average))}% and you did not pass this module<br/>`
+                output += `Your final mark is ${(Math.trunc(this.average))}% and you did not pass this module.<br/>`;
                 console.log(output);
             }
         }
         //if there is only one assessment left.
         else if(this.numOfAssessments - this.calcNumOfAssessments() == 1)
         {
-            console.log("One assessment left");
+            let sumOfTakenAssessements = 0;
+            for(let assessment_name in this.assessments){
+                sumOfTakenAssessements += Number(this.assessments[assessment_name]["worth"]);
+            }
+    
+            let worthOfFinalAssessment = 100 - sumOfTakenAssessements;
+
+            output += `You have one assessment left which is worth ${worthOfFinalAssessment}%.<br/>`;
+            console.log(output);
             //calculate average
             //if average is first, tell user that they have already achieved a first.
             if(this.average >= 70)
@@ -334,9 +342,9 @@ class modules{
 let databases = new modules("Databases", "COMP1121", 4, 10);
 
 //Programming for the web
-databases.addAssessment("assessment_1", 10, 10, 10);
-databases.addAssessment("assessment_2", 19, 20, 20);
-databases.addAssessment("assessment_3", 20, 30, 30);
+databases.addAssessment("assessment_1", 20, 30, 30);
+databases.addAssessment("assessment_2", 10, 20, 20);
+databases.addAssessment("assessment_3", 10, 30, 30);
 // databases.addAssessment("assessment_4", 20.5, 40, 40);
 
 databases.feedback();
@@ -371,31 +379,43 @@ let setModuleName = function(node, nameofModule){
     node.firstChild.nextSibling.firstChild.nextSibling.textContent = nameofModule;
 }
 //this function sets the button to specific module
-let setDeleteModuleButton = function(node, nameofModule){
+//find first button
+let setAddAssessmentButton = function(node, nameofModule){
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.classList.add(`${nameofModule}-add-assessment-button`);
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.classList.add(`${nameofModule}`);
 }
-let setAddAssessmentButton = function(node, nameofModule){
-    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-delete-assessment-button`);
+
+//find second button
+let setModuleFeedbackButton = function(node, nameofModule){
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-module-feedback-button`);
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
 }
-let setModuleDetailsButton = function(node, nameofModule){
-    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-module-details-button`);
+
+//find third button
+let setMinimiseButton = function(node, nameofModule){
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-minimise-button`);
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
-}
-let setModuleFeedbackButton = function(node, nameofModule){
-    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-module-feedback-button`);
-    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
 
 }
-let setMinimizeButton = function(node, nameofModule){
-    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-minimise-button`);
-    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
+
+//find fourth button
+let setDeleteModuleButton = function(node, nameofModule){
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-delete-module-button`);
+    node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
 }
+
+// //find fifth button
+// let setDeleteModuleButton = function(node, nameofModule){
+//     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.classList.add(`${nameofModule}-add-assessment-button`);
+//     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.classList.add(`${nameofModule}`);
+// }
+
 let setModuleDropdownClassName = function(node, nameofModule){
     node.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-module-dropdown`);
     node.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
 }
+
+
 
 //Add Module Popup Cancel button
 let closeModulePopup = function(){
@@ -442,7 +462,7 @@ let saveModule = function(){
     let popup = document.querySelector(".add-module-popup-container");
     popup.classList.add("hide");
 
-    //Add the new module to the list
+    //Clone node and Add the new nodeto the list
     let newModule = node.cloneNode(true);
     newModule.classList.remove('original-module');
     newModule.setAttribute("id", `${moduleName}-module`);
@@ -454,9 +474,8 @@ let saveModule = function(){
     //Set the class names for buttons of the new module
     setDeleteModuleButton(newModule,moduleName);
     setAddAssessmentButton(newModule, moduleName);
-    setModuleDetailsButton(newModule, moduleName);
     setModuleFeedbackButton(newModule, moduleName);
-    setMinimizeButton(newModule, moduleName);
+    setMinimiseButton(newModule, moduleName);
     setModuleDropdownClassName(newModule, moduleName);
 
     let newElement = document.createElement("div");
