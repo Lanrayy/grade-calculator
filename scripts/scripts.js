@@ -116,7 +116,7 @@ class modules{
             let worth = this.assessments[assessment_name]["worth"];
             worth = worth / 100;
 
-            weightedAverage += (grade * worth)
+            weightedAverage += (grade * worth);
             console.log(weightedAverage);
         }
 
@@ -325,13 +325,35 @@ class modules{
                 output += this.getWeightedProjections(this.average);
             }
         }
+        //If there is more than 1 assessments left
         else{
+            //number of assessments left
+            let numberOfAssessmentsLeft = this.numOfAssessments - this.calcNumOfAssessments();
+
+            let sumOfTakenAssessements = 0;
+            //calculate the worth of final assessment
+            for(let assessment_name in this.assessments){
+                sumOfTakenAssessements += Number(this.assessments[assessment_name]["worth"]);
+            }
+    
+            let worthOfFinalAssessment = 100 - sumOfTakenAssessements;
+
+            //For a first
+            let answerFirst = (((70 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100 ) 
+            console.log(`The students current average is ${this.average}.To get a first, over the next ${numberOfAssessmentsLeft} assessments, the student has to get an average of ${answerFirst}%`);
+
+            //For a Second
+            let answerTwoOne = (((60 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100 ) 
+            console.log(`The students current average is ${this.average}.To get a 2.1, over the next ${numberOfAssessmentsLeft} assessments, the student has to get an average of ${answerTwoOne}%`);
+
+
+
+
             
             output += `Your current mark is ${(this.average)}%.<br/>`
             console.log(output);
             output += "You need to add/do more assessements to get better insights.<br/>";
             console.log(output);
-            
         }
 
 
@@ -348,8 +370,8 @@ let databases = new modules("Databases", "COMP1121", 4, 10);
 //Programming for the web
 databases.addAssessment("assessment_1", 20, 30, 30);
 databases.addAssessment("assessment_2", 10, 20, 20);
-databases.addAssessment("assessment_3", 10, 30, 30);
-// databases.addAssessment("assessment_4", 20.5, 40, 40);
+// databases.addAssessment("assessment_3", 20, 25, 25);
+// databases.addAssessment("assessment_4", 20, 25, 25);
 
 databases.feedback();
 
