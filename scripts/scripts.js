@@ -348,6 +348,10 @@ class modules{
                 output += `You have already achieved a first, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect chances of getting a first.<br/>`
                 console.log(output);
             }
+            else if(answerFirst > 100){
+                output += "Unfortunately, you cannot get a first in this module.<br/>";
+                console.log(output);
+            }
             else{
                 output += `You need an average of ${answerFirst}%, ${modules.calcGrade(answerFirst)} over the next ${numberOfAssessmentsLeft} assessments to get a first.<br/>`;
                 console.log(output);
@@ -357,6 +361,10 @@ class modules{
             let answerTwoOne = (((60 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
             if(answerTwoOne <=0){
                 output += `You have already achieved a 2.1, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect your chances of getting a 2.1.<br/>`;
+                console.log(output);
+            }
+            else if(answerTwoOne > 100){
+                output += "Unfortunately, you cannot get a 2.1 in this module.<br/>";
                 console.log(output);
             }
             else{
@@ -372,16 +380,24 @@ class modules{
                 output += `You have already achieved a 2.2, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect chances of getting a 2.2.<br/>`;
                 console.log(output);
             }
+            else if(answerTwoTwo > 100){
+                output += "Unfortunately, you cannot get a 2.2 in this module.<br/>";
+                console.log(output);
+            }
             else{
                 output += `You need an average of ${answerTwoTwo}%, ${modules.calcGrade(answerTwoTwo)} over the next ${numberOfAssessmentsLeft} assessments to get a 2.2.<br/>`;
                 console.log(output);
             }
 
-
             //For a Pass
             let answerPass = (((40 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
+            console.log(answerPass);
             if(answerPass <= 0){
                 output += `You have already passed, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect your chances of getting a pass.<br/>`;
+                console.log(output);
+            }
+            else if(answerPass > 100){
+                output += "Unfortunately, you cannot pass this module.<br/>";
                 console.log(output);
             }
             else{
@@ -403,7 +419,7 @@ class modules{
 let databases = new modules("Databases", "COMP1121", 4, 10);
 
 //Programming for the web
-databases.addAssessment("assessment_1", 10, 10, 10);
+databases.addAssessment("assessment_1", 10, 70, 70);
 // databases.addAssessment("assessment_2", 10, 20, 20);
 // databases.addAssessment("assessment_3", 5, 25, 25);
 // databases.addAssessment("assessment_4", 5, 25, 25);
