@@ -330,57 +330,65 @@ class modules{
             //number of assessments left
             let numberOfAssessmentsLeft = this.numOfAssessments - this.calcNumOfAssessments();
 
-            let sumOfTakenAssessements = 0;
             //calculate the worth of final assessment
+            let sumOfTakenAssessements = 0;
             for(let assessment_name in this.assessments){
                 sumOfTakenAssessements += Number(this.assessments[assessment_name]["worth"]);
             }
-    
             let worthOfFinalAssessment = 100 - sumOfTakenAssessements;
 
+            //Append the feedback into the output string            
+            output += `Your current grade is ${(this.average)}%.<br/>`;
+            output += `You have ${numberOfAssessmentsLeft} assessements left worth a total of ${(worthOfFinalAssessment)}%.<br/>`;
+
+            // Calculate what the user needs:
             //For a first
-            let answerFirst = (((70 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100);
+            let answerFirst = (((70 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
             if(answerFirst <= 0){
-                console.log(`You have already achieved a first, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect chances of getting a first.`);
+                output += `You have already achieved a first, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect chances of getting a first.<br/>`
+                console.log(output);
             }
             else{
-                console.log(`The students current average is ${this.average}.To get a first, over the next ${numberOfAssessmentsLeft} assessments, the student has to get an average of ${answerFirst}%`);
+                output += `You need an average of ${answerFirst}%, ${modules.calcGrade(answerFirst)} over the next ${numberOfAssessmentsLeft} assessments to get a first.<br/>`;
+                console.log(output);
             }
 
             //For a Two One
-            let answerTwoOne = (((60 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100);
+            let answerTwoOne = (((60 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
             if(answerTwoOne <=0){
-                console.log(`You have already achieved a 2.1, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect your chances of getting a 2.1`);
+                output += `You have already achieved a 2.1, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect your chances of getting a 2.1.<br/>`;
+                console.log(output);
             }
             else{
-                console.log(`The students current average is ${this.average}.To get a 2.1, over the next ${numberOfAssessmentsLeft} assessments, the student has to get an average of ${answerTwoOne}%`);
+                output += `You need an average of ${answerTwoOne}%, ${modules.calcGrade(answerTwoOne)} over the next ${numberOfAssessmentsLeft} assessments to get a 2.1.<br/>`;
+                console.log(output);
             }
 
 
             //For a Two Two 
-            let answerTwoTwo = (((50 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100);
+            let answerTwoTwo = (((50 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
             if(answerTwoTwo <= 0){
-                console.log(`You have already achieved a 2.2, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect chances of getting a 2.2.`);
+                
+                output += `You have already achieved a 2.2, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect chances of getting a 2.2.<br/>`;
+                console.log(output);
             }
             else{
-                console.log(`The students current average is ${this.average}.To get a 2.2, over the next ${numberOfAssessmentsLeft} assessments, the student has to get an average of ${answerTwoTwo}%`);
+                output += `You need an average of ${answerTwoTwo}%, ${modules.calcGrade(answerTwoTwo)} over the next ${numberOfAssessmentsLeft} assessments to get a 2.2.<br/>`;
+                console.log(output);
             }
 
 
             //For a Pass
-            let answerPass = (((40 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100);
+            let answerPass = (((40 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
             if(answerPass <= 0){
-                console.log(`You have already passed, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect your chances of getting a pass.`);
+                output += `You have already passed, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect your chances of getting a pass.<br/>`;
+                console.log(output);
             }
             else{
-                console.log(`The students current average is ${this.average}.To get a pass, over the next ${numberOfAssessmentsLeft} assessments, the student has to get an average of ${answerPass}%`);
+                output += `You need an average of ${answerPass}%, ${modules.calcGrade(answerPass)} over the next ${numberOfAssessmentsLeft} assessments to get a pass.<br/>`;
+                console.log(output);
             }
 
-            
-            output += `Your current mark is ${(this.average)}%.<br/>`
-            console.log(output);
-            output += "You need to add/do more assessements to get better insights.<br/>";
-            console.log(output);
         }
 
 
@@ -395,7 +403,7 @@ class modules{
 let databases = new modules("Databases", "COMP1121", 4, 10);
 
 //Programming for the web
-databases.addAssessment("assessment_1", 70, 70, 70);
+databases.addAssessment("assessment_1", 10, 10, 10);
 // databases.addAssessment("assessment_2", 10, 20, 20);
 // databases.addAssessment("assessment_3", 5, 25, 25);
 // databases.addAssessment("assessment_4", 5, 25, 25);
