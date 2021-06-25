@@ -372,7 +372,6 @@ class modules{
                 console.log(output);
             }
 
-
             //For a Two Two 
             let answerTwoTwo = (((50 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
             if(answerTwoTwo <= 0){
@@ -618,10 +617,24 @@ let saveAssessment = function() {
     let totalMarks = Number(document.querySelector("#total-marks").value);
     let worth = document.querySelector("#worth").value;
 
-    if(userAssessmentName == "" || score == "" || totalMarks == "" || worth == "" || worth > 100 || score > totalMarks){
-        alert("Please check all the fields and ensure you enter valid values!");
+    if(userAssessmentName == "" || score == "" || totalMarks == "" || worth == ""){
+        alert("Error: Please check all the fields and ensure you enter valid values!");
         return 0;
     }
+
+    if(score > totalMarks){
+        alert("Error: Your score is greater than the total number of marks!");
+        return 0;
+    }
+
+    if(worth > 100){
+        alert("Error: An assessment cannot be worth more than 100%!");
+        return 0;
+    }
+
+
+
+
 
     console.log(assessmentName);
     console.log(score);
