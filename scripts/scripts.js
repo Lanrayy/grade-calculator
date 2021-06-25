@@ -116,7 +116,7 @@ class modules{
             let worth = this.assessments[assessment_name]["worth"];
             worth = worth / 100;
 
-            weightedAverage += (grade * worth)
+            weightedAverage += (grade * worth);
             console.log(weightedAverage);
         }
 
@@ -325,17 +325,86 @@ class modules{
                 output += this.getWeightedProjections(this.average);
             }
         }
+        //If there is more than 1 assessments left
         else{
-            
-            output += `Your current mark is ${(this.average)}%.<br/>`
-            console.log(output);
-            output += "You need to add/do more assessements to get better insights.<br/>";
-            console.log(output);
-            
+            //number of assessments left
+            let numberOfAssessmentsLeft = this.numOfAssessments - this.calcNumOfAssessments();
+
+            //calculate the worth of final assessment
+            let sumOfTakenAssessements = 0;
+            for(let assessment_name in this.assessments){
+                sumOfTakenAssessements += Number(this.assessments[assessment_name]["worth"]);
+            }
+            let worthOfFinalAssessment = 100 - sumOfTakenAssessements;
+
+            //Append the feedback into the output string            
+            output += `Your current grade is ${(this.average)}%.<br/>`;
+            output += `You have ${numberOfAssessmentsLeft} assessements left worth a total of ${(worthOfFinalAssessment)}%.<br/>`;
+
+            // Calculate what the user needs:
+            //For a first
+            let gradeForFirst = (((70 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
+            if(gradeForFirst <= 0){
+                output += `You have already achieved a first, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect chances of getting a first.<br/>`
+                console.log(output);
+            }
+            else if(gradeForFirst > 100){
+                output += "Unfortunately, you cannot get a first in this module.<br/>";
+                console.log(output);
+            }
+            else{
+                output += `You need an average of ${gradeForFirst}%, ${modules.calcGrade(gradeForFirst)} over the next ${numberOfAssessmentsLeft} assessments to get a first.<br/>`;
+                console.log(output);
+            }
+
+            //For a Two One
+            let gradeForTwoOne = (((60 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
+            if(gradeForTwoOne <=0){
+                output += `You have already achieved a 2.1, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect your chances of getting a 2.1.<br/>`;
+                console.log(output);
+            }
+            else if(gradeForTwoOne > 100){
+                output += "Unfortunately, you cannot get a 2.1 in this module.<br/>";
+                console.log(output);
+            }
+            else{
+                output += `You need an average of ${gradeForTwoOne}%, ${modules.calcGrade(gradeForTwoOne)} over the next ${numberOfAssessmentsLeft} assessments to get a 2.1.<br/>`;
+                console.log(output);
+            }
+
+            //For a Two Two 
+            let gradeForTwoTwo = (((50 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
+            if(gradeForTwoTwo <= 0){
+                
+                output += `You have already achieved a 2.2, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect chances of getting a 2.2.<br/>`;
+                console.log(output);
+            }
+            else if(gradeForTwoTwo > 100){
+                output += "Unfortunately, you cannot get a 2.2 in this module.<br/>";
+                console.log(output);
+            }
+            else{
+                output += `You need an average of ${gradeForTwoTwo}%, ${modules.calcGrade(gradeForTwoTwo)} over the next ${numberOfAssessmentsLeft} assessments to get a 2.2.<br/>`;
+                console.log(output);
+            }
+
+            //For a Pass
+            let gradeForPass = (((40 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
+            console.log(gradeForPass);
+            if(gradeForPass <= 0){
+                output += `You have already passed, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect your chances of getting a pass.<br/>`;
+                console.log(output);
+            }
+            else if(gradeForPass > 100){
+                output += "Unfortunately, you cannot pass this module.<br/>";
+                console.log(output);
+            }
+            else{
+                output += `You need an average of ${gradeForPass}%, ${modules.calcGrade(gradeForPass)} over the next ${numberOfAssessmentsLeft} assessments to get a pass.<br/>`;
+                console.log(output);
+            }
+
         }
-
-
-
         return output;
     }
 
@@ -346,10 +415,10 @@ class modules{
 let databases = new modules("Databases", "COMP1121", 4, 10);
 
 //Programming for the web
-databases.addAssessment("assessment_1", 20, 30, 30);
-databases.addAssessment("assessment_2", 10, 20, 20);
-databases.addAssessment("assessment_3", 10, 30, 30);
-// databases.addAssessment("assessment_4", 20.5, 40, 40);
+databases.addAssessment("assessment_1", 10, 70, 70);
+// databases.addAssessment("assessment_2", 10, 20, 20);
+// databases.addAssessment("assessment_3", 5, 25, 25);
+// databases.addAssessment("assessment_4", 5, 25, 25);
 
 databases.feedback();
 
@@ -545,10 +614,24 @@ let saveAssessment = function() {
     let totalMarks = Number(document.querySelector("#total-marks").value);
     let worth = document.querySelector("#worth").value;
 
-    if(userAssessmentName == "" || score == "" || totalMarks == "" || worth == "" || worth > 100 || score > totalMarks){
-        alert("Please check all the fields and ensure you enter valid values!");
+    if(userAssessmentName == "" || score == "" || totalMarks == "" || worth == ""){
+        alert("Error: Please check all the fields and ensure you enter valid values!");
         return 0;
     }
+
+    if(score > totalMarks){
+        alert("Error: Your score is greater than the total number of marks!");
+        return 0;
+    }
+
+    if(worth > 100){
+        alert("Error: An assessment cannot be worth more than 100%!");
+        return 0;
+    }
+
+
+
+
 
     console.log(assessmentName);
     console.log(score);
