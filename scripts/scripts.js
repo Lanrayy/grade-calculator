@@ -326,12 +326,16 @@ class modules{
             }
         }
         else{
+            
             output += `Your current mark is ${(this.average)}%.<br/>`
             console.log(output);
             output += "You need to add/do more assessements to get better insights.<br/>";
             console.log(output);
             
         }
+
+
+
         return output;
     }
 

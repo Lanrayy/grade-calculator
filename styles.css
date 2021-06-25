@@ -105,7 +105,6 @@ input:focus {
 .logo:hover {
   -webkit-filter: invert(100%);
   filter: invert(100%);
-  filter: ;
 }
 
 .welcome-message {
