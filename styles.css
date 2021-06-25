@@ -281,7 +281,7 @@ input:focus {
 /* MODULE FEEDBACK POPUP */
 .module-feedback-popup {
   width: 630px;
-  min-height: 340px;
+  min-height: 330px;
   background-color: white;
   z-index: 1;
   border-radius: 10px;
@@ -305,6 +305,15 @@ input:focus {
   height: fit-content;
   display: flex;
   opacity: 0.3;
+}
+
+/* Change hwo the cancel button in the module feedback popup behaves */
+.module-feedback-button-container {
+  position: relative;
+  top: 15px;
+  bottom: 0px;
+  right: 0px;
+  margin-bottom: 15px;
 }
 
 .module-feedback-container {
