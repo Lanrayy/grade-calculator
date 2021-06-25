@@ -342,9 +342,14 @@ class modules{
             let answerFirst = (((70 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100 ) 
             console.log(`The students current average is ${this.average}.To get a first, over the next ${numberOfAssessmentsLeft} assessments, the student has to get an average of ${answerFirst}%`);
 
-            //For a Second
+            //For a Two One
             let answerTwoOne = (((60 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100 ) 
             console.log(`The students current average is ${this.average}.To get a 2.1, over the next ${numberOfAssessmentsLeft} assessments, the student has to get an average of ${answerTwoOne}%`);
+
+            //For a Two Two 
+            let answerTwoTwo = (((50 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100 ) 
+            console.log(`The students current average is ${this.average}.To get a 2.1, over the next ${numberOfAssessmentsLeft} assessments, the student has to get an average of ${answerTwoTwo}%`);
+
 
 
 
