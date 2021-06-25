@@ -348,7 +348,11 @@ class modules{
 
             //For a Two Two 
             let answerTwoTwo = (((50 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100 ) 
-            console.log(`The students current average is ${this.average}.To get a 2.1, over the next ${numberOfAssessmentsLeft} assessments, the student has to get an average of ${answerTwoTwo}%`);
+            console.log(`The students current average is ${this.average}.To get a 2.2, over the next ${numberOfAssessmentsLeft} assessments, the student has to get an average of ${answerTwoTwo}%`);
+
+            //For a Pass
+            let answerPass = (((40 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100 ) 
+            console.log(`The students current average is ${this.average}.To get a pass, over the next ${numberOfAssessmentsLeft} assessments, the student has to get an average of ${answerPass}%`);
 
 
 
@@ -375,8 +379,8 @@ let databases = new modules("Databases", "COMP1121", 4, 10);
 //Programming for the web
 databases.addAssessment("assessment_1", 20, 30, 30);
 databases.addAssessment("assessment_2", 10, 20, 20);
-// databases.addAssessment("assessment_3", 20, 25, 25);
-// databases.addAssessment("assessment_4", 20, 25, 25);
+databases.addAssessment("assessment_3", 5, 25, 25);
+databases.addAssessment("assessment_4", 5, 25, 25);
 
 databases.feedback();
 
