@@ -555,6 +555,12 @@ let saveModule = function(){
     newElement.setAttribute("class", "module" );
 
     modulesContainer.appendChild(newModule);
+
+    // RESET THE VALUES OF THE INPUTS TO NOTHING
+    document.querySelector("#module-name").value = ""; 
+    document.querySelector("#module-code").value = ""
+    document.querySelector("#num-of-assessments").value = "";
+    document.querySelector("#credits").value = "";
 }
 
 //Delete the selected module that was clicked on
@@ -629,10 +635,6 @@ let saveAssessment = function() {
         return 0;
     }
 
-
-
-
-
     console.log(assessmentName);
     console.log(score);
     console.log(totalMarks);
@@ -677,6 +679,13 @@ let saveAssessment = function() {
     else{
         alert("You have already added the maximum number of assessments!");
     }
+
+    // RESET THE VALUES FIELDS
+    document.querySelector("#assessment-name").value = "";
+    document.querySelector("#score").value = "";
+    document.querySelector("#total-marks").value = "";
+    document.querySelector("#worth").value = "";
+
 }
 
 //this funtion deletes the clicked assessment from the list of assessments for the specifc module
