@@ -1,5 +1,5 @@
 'use strict'
-console.log("Hello");
+// console.log("Hello");
 
 //Object constructor
 //Allows you to create multiple instances of the same object
@@ -63,7 +63,7 @@ class modules{
     moduleDetails(){
 
         let output = `Databases ${this.moduleCode} is worth ${this.credits} credits and has ${this.numOfAssessments} assessments.<br/>\nYou have done already done ${this.calcNumOfAssessments()} asssessment(s).`;
-        console.log(output);
+        // console.log(output);
         return output;
     };
 
@@ -117,7 +117,7 @@ class modules{
             worth = worth / 100;
 
             weightedAverage += (grade * worth);
-            console.log(weightedAverage);
+            // console.log(weightedAverage);
         }
 
 
@@ -166,47 +166,47 @@ class modules{
 
         //Calculate the marks need for a first using the weighted average
         //Show it to the user
-        console.log(`Sum: ${sumOfTakenAssessements}`);
-        console.log(`Worth of final assessment: ${worthOfFinalAssessment}`);
+        // console.log(`Sum: ${sumOfTakenAssessements}`);
+        // console.log(`Worth of final assessment: ${worthOfFinalAssessment}`);
 
         let percentForAFirst = ((70 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
-        console.log(percentForAFirst);
+        // console.log(percentForAFirst);
         //if the marks needed for a first is less than zero, then the student has ahieved a first already regardless of the result of the final assessment. 
         if(percentForAFirst <= 0){
             weightedFeedbackForFirst = "You have already achieved a first <br/>";
-            console.log(weightedFeedbackForFirst);
+            // console.log(weightedFeedbackForFirst);
             output += weightedFeedbackForFirst;
         }else{
 
             //Check if the percent needed for a first is greater that 100% of the full grade 
             if(percentForAFirst  > 100){
                 weightedFeedbackForFirst = "Unfortunately, you cannot get a first in this module <br/>";
-                console.log(weightedFeedbackForFirst);
+                // console.log(weightedFeedbackForFirst);
                 output += weightedFeedbackForFirst;
             }
             else{
                 weightedFeedbackForFirst = `You need to get at least ${percentForAFirst}%,${modules.calcGrade(percentForAFirst)}in the final assessment in order to get a first.<br/>`;
-                console.log(weightedFeedbackForFirst);
+                // console.log(weightedFeedbackForFirst);
                 output += weightedFeedbackForFirst;
             }
         }
 
         let percentForATwoOne = ((60 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
-        console.log(percentForATwoOne);
+        // console.log(percentForATwoOne);
         if(percentForATwoOne <= 0){
             weightedFeedbackForTwoOne = "You have already achieved a 2.1.<br/>";
-            console.log(weightedFeedbackForTwoOne);
+            // console.log(weightedFeedbackForTwoOne);
             output += weightedFeedbackForTwoOne;
 
         }else{
             if(percentForATwoOne > 100){
                 weightedFeedbackForTwoOne = "Unfortunately, you cannot get a 2.1 in this module.<br/>";
-                console.log(weightedFeedbackForTwoOne);
+                // console.log(weightedFeedbackForTwoOne);
                 output += weightedFeedbackForTwoOne;
             }
             else{
                 weightedFeedbackForTwoOne = `You need to get at least ${percentForATwoOne}%,${modules.calcGrade(percentForATwoOne)}in the final assessment in order to get a 2.1.<br/>`;
-                console.log(weightedFeedbackForTwoOne);
+                // console.log(weightedFeedbackForTwoOne);
                 output += weightedFeedbackForTwoOne
             }
         }
@@ -214,18 +214,18 @@ class modules{
         let percentForATwoTwo = ((50 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
         if(percentForATwoTwo <= 0){
             weightedFeedbackForTwoTwo = "You have already achieved a 2.2.<br/>";
-            console.log(weightedFeedbackForTwoTwo);
+            // console.log(weightedFeedbackForTwoTwo);
             output += weightedFeedbackForTwoTwo;
         }
         else{
             if(percentForATwoTwo > 100){
                 weightedFeedbackForTwoTwo = "Unfortunately, you cannot get a 2.2 in this module.<br/>";
-                console.log(weightedFeedbackForTwoTwo);
+                // console.log(weightedFeedbackForTwoTwo);
                 output += weightedFeedbackForTwoTwo;
             }
             else{
                 weightedFeedbackForTwoTwo = `You need to get at least ${percentForATwoTwo}%,${modules.calcGrade(percentForATwoTwo)}in the final assessment in order to get a 2.2.<br/>`;
-                console.log(weightedFeedbackForTwoTwo);
+                // console.log(weightedFeedbackForTwoTwo);
                 output += weightedFeedbackForTwoTwo;
             }
         }
@@ -233,18 +233,18 @@ class modules{
         let percentForAPass = ((40 - num)/ (worthOfFinalAssessment / 100)).toFixed(2);
         if(percentForAPass <= 0){
             weightedFeedbackForPass = "You have already passed<br/>";
-            console.log(weightedFeedbackForPass);
+            // console.log(weightedFeedbackForPass);
             output += weightedFeedbackForPass;
         }
         else{
             if(percentForAPass > 100){
                 weightedFeedbackForPass = "Unfortunately, You cannot pass this module.<br/>";
-                console.log(weightedFeedbackForPass);
+                // console.log(weightedFeedbackForPass);
                 output += weightedFeedbackForPass;
             }
             else{
                 weightedFeedbackForPass = `You need to get at least ${percentForAPass}%,${modules.calcGrade(percentForAPass)}in the final assessment in order to get a Pass.<br/>`;
-                console.log(weightedFeedbackForPass);
+                // console.log(weightedFeedbackForPass);
                 output += weightedFeedbackForPass;
             }
         }
@@ -262,26 +262,26 @@ class modules{
         //Log the user's final grade for the module.
         if(this.numOfAssessments - this.calcNumOfAssessments() == 0)
         {
-            console.log("No assessments left");
+            // console.log("No assessments left");
 
             if(this.average >= 70){
                 output += `Your final mark is ${(Math.trunc(this.average))}% and your final grade is a first.<br/>`;
-                console.log(output);
+                // console.log(output);
                 
             } else if(this.average >= 60 && this.average < 70){
                 output += `Your final mark is ${(Math.trunc(this.average))}% and your final grade is a 2.1.<br/>`;
-                console.log(output);
+                // console.log(output);
                 
             }else if(this.average >= 50 && this.average < 60){
                 output += `Your final mark is ${(Math.trunc(this.average))}% and your final grade is a 2.2.<br/>`;
-                console.log(output);
+                // console.log(output);
                 
             }else if(this.average >= 40 && this.average < 50){
                 output += `Your final mark is ${(Math.trunc(this.average))}% and your final grade is a pass.<br/>`;
-                console.log(output);
+                // console.log(output);
             }else {
                 output += `Your final mark is ${(Math.trunc(this.average))}% and you did not pass this module.<br/>`;
-                console.log(output);
+                // console.log(output);
             }
         }
         //if there is only one assessment left.
@@ -295,13 +295,13 @@ class modules{
             let worthOfFinalAssessment = 100 - sumOfTakenAssessements;
 
             output += `You have one assessment left which is worth ${worthOfFinalAssessment}%.<br/>`;
-            console.log(output);
+            // console.log(output);
             //calculate average
             //if average is first, tell user that they have already achieved a first.
             if(this.average >= 70)
             {
                 output += `Your current mark is ${this.average}% and you currently have a first.<br/>`;
-                console.log(output);
+                // console.log(output);
                 output += this.getWeightedProjections(this.average);
 
             } 
@@ -309,19 +309,19 @@ class modules{
             else if(this.average >= 60 && this.average < 70)
             {
                 output += `Your current mark is ${(this.average)}% and you currently have a 2.1.<br/>`;
-                console.log(output);
+                // console.log(output);
                 output += this.getWeightedProjections(this.average);
             }else if(this.average >= 50 && this.average < 60){
                 output += `Your current mark is ${this.average}% and you currently have a 2.2.<br/>`;
-                console.log(output);
+                // console.log(output);
                 output += this.getWeightedProjections(this.average);
             }else if(this.average >= 40 && this.average < 50){
                 output += `Your current mark is ${this.average}% and you and currently have a pass.<br/>`
-                console.log(output);
+                // console.log(output);
                 output += this.getWeightedProjections(this.average);
             } else{
                 output += `Your current mark is ${this.average}% and you have not passed yet.<br/>`
-                console.log(output);
+                // console.log(output);
                 output += this.getWeightedProjections(this.average);
             }
         }
@@ -346,30 +346,30 @@ class modules{
             let gradeForFirst = (((70 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
             if(gradeForFirst <= 0){
                 output += `You have already achieved a first, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect chances of getting a first.<br/>`
-                console.log(output);
+                // console.log(output);
             }
             else if(gradeForFirst > 100){
                 output += "Unfortunately, you cannot get a first in this module.<br/>";
-                console.log(output);
+                // console.log(output);
             }
             else{
                 output += `You need an average of ${gradeForFirst}%, ${modules.calcGrade(gradeForFirst)} over the next ${numberOfAssessmentsLeft} assessments to get a first.<br/>`;
-                console.log(output);
+                // console.log(output);
             }
 
             //For a Two One
             let gradeForTwoOne = (((60 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
             if(gradeForTwoOne <=0){
                 output += `You have already achieved a 2.1, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect your chances of getting a 2.1.<br/>`;
-                console.log(output);
+                // console.log(output);
             }
             else if(gradeForTwoOne > 100){
                 output += "Unfortunately, you cannot get a 2.1 in this module.<br/>";
-                console.log(output);
+                // console.log(output);
             }
             else{
                 output += `You need an average of ${gradeForTwoOne}%, ${modules.calcGrade(gradeForTwoOne)} over the next ${numberOfAssessmentsLeft} assessments to get a 2.1.<br/>`;
-                console.log(output);
+                // console.log(output);
             }
 
             //For a Two Two 
@@ -377,31 +377,31 @@ class modules{
             if(gradeForTwoTwo <= 0){
                 
                 output += `You have already achieved a 2.2, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect chances of getting a 2.2.<br/>`;
-                console.log(output);
+                // console.log(output);
             }
             else if(gradeForTwoTwo > 100){
                 output += "Unfortunately, you cannot get a 2.2 in this module.<br/>";
-                console.log(output);
+                // console.log(output);
             }
             else{
                 output += `You need an average of ${gradeForTwoTwo}%, ${modules.calcGrade(gradeForTwoTwo)} over the next ${numberOfAssessmentsLeft} assessments to get a 2.2.<br/>`;
-                console.log(output);
+                // console.log(output);
             }
 
             //For a Pass
             let gradeForPass = (((40 - this.average)/ numberOfAssessmentsLeft) / (worthOfFinalAssessment/ numberOfAssessmentsLeft) * 100).toFixed(2);
-            console.log(gradeForPass);
+            // console.log(gradeForPass);
             if(gradeForPass <= 0){
                 output += `You have already passed, your score in the remaining ${numberOfAssessmentsLeft} assessments will not affect your chances of getting a pass.<br/>`;
-                console.log(output);
+                // console.log(output);
             }
             else if(gradeForPass > 100){
                 output += "Unfortunately, you cannot pass this module.<br/>";
-                console.log(output);
+                // console.log(output);
             }
             else{
                 output += `You need an average of ${gradeForPass}%, ${modules.calcGrade(gradeForPass)} over the next ${numberOfAssessmentsLeft} assessments to get a pass.<br/>`;
-                console.log(output);
+                // console.log(output);
             }
 
         }
@@ -413,31 +413,29 @@ class modules{
 
 // Tests
 let databases = new modules("Databases", "COMP1121", 4, 10);
-
 //Programming for the web
 databases.addAssessment("assessment_1", 10, 70, 70);
 // databases.addAssessment("assessment_2", 10, 20, 20);
 // databases.addAssessment("assessment_3", 5, 25, 25);
 // databases.addAssessment("assessment_4", 5, 25, 25);
-
 databases.feedback();
-
 databases.calcNumOfAssessments();
 // databases.addAssessment("coursework_4", 14, 16, 10);
+// console.log("****Feedback****");
+// databases.feedback();
+// console.log("<br/>");
 
-console.log("****Feedback****");
-databases.feedback();
-console.log("<br/>");
 
-
+/*
+*
+MAIN PROGRAM
+*
+*/
 let modulesList = {};
 
 //Additional methods
-//this function sets the button to specific module
-
-//Main program
-
 let modulesContainer = document.querySelector(".modules-container");
+//the module node that will be copied
 let node = document.querySelector(".original-module");
 
 //Add Module
@@ -451,6 +449,7 @@ addModuleButton.addEventListener("click", function(){
 let setModuleName = function(node, nameofModule){
     node.firstChild.nextSibling.firstChild.nextSibling.textContent = nameofModule;
 }
+
 //this function sets the button to specific module
 //find first button
 let setAddAssessmentButton = function(node, nameofModule){
@@ -468,7 +467,6 @@ let setModuleFeedbackButton = function(node, nameofModule){
 let setMinimiseButton = function(node, nameofModule){
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-minimise-button`);
     node.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
-
 }
 
 //find fourth button
@@ -487,7 +485,6 @@ let setModuleDropdownClassName = function(node, nameofModule){
     node.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}-module-dropdown`);
     node.firstChild.nextSibling.nextSibling.nextSibling.classList.add(`${nameofModule}`);
 }
-
 
 
 //Add Module Popup Cancel button
@@ -509,12 +506,10 @@ let closeModuleFeedbackPopup = function(){
 let sampleModule;
 
 let saveModule = function(){
-    //TODO: Get the detail user enters , parse and remove all spaces
-    
     //Get all the values for the new module
     let moduleName = document.querySelector("#module-name").value;
+    // Get the detail user enters , parse and remove all spaces
     moduleName = moduleName.replace(/ /g, "-");
- 
     
     //This variable will be displayed to the user
     let userModuleName = document.querySelector("#module-name").value; 
@@ -563,24 +558,23 @@ let saveModule = function(){
     document.querySelector("#credits").value = "";
 }
 
+
 //Delete the selected module that was clicked on
 let deleteModule = function(element){
     //confirm if user wants to delete module
-    let answer = prompt("Are you sure you want to delete this module? (y/n)");
+    let answer = confirm("Are you sure you want to delete this module? (y/n)");
 
-    if(answer[0] == "y"){
+    if(answer == true){
         let moduleName = element.classList[3];
         let moduleToDelete = document.querySelector(`#${moduleName}-module`);
 
         let modulesContainer = document.querySelector(".modules-container");
-        console.log(modulesContainer);
+        // console.log(modulesContainer);
         //Delete the selected module
         modulesContainer.removeChild(moduleToDelete);
 
         delete modulesList[`${moduleName}`];
-    }
-
-    
+    } 
 };
 
 //This function opens the add module panel when the add assessment button is clicked
@@ -598,7 +592,6 @@ let addAssessment = function(element){
     target.textContent = moduleName;
 }
 
-
 let numberOfAssessmentsTaken = 1;
 //this fucntion adds the assessment to the list
 let saveAssessment = function() {
@@ -607,13 +600,11 @@ let saveAssessment = function() {
     let modulesDropdown = document.querySelector(`.${moduleName}-module-dropdown`); 
 
     //Get the number of elements in the dropdown
-
     //Get the datails of the assessment to be added for the module object
-    console.log(numberOfAssessmentsTaken);
+    // console.log(numberOfAssessmentsTaken);
 
     let assessmentName = `assessment_${numberOfAssessmentsTaken}`;
     
-
     //Get the details the user enters and parse it
     let userAssessmentName = document.querySelector("#assessment-name").value;
     let score = Number(document.querySelector("#score").value);
@@ -635,15 +626,15 @@ let saveAssessment = function() {
         return 0;
     }
 
-    console.log(assessmentName);
-    console.log(score);
-    console.log(totalMarks);
-    console.log(worth);
+    // console.log(assessmentName);
+    // console.log(score);
+    // console.log(totalMarks);
+    // console.log(worth);
 
     let numberOfAssessmentsAdded = modulesList[`${moduleName}`].calcNumOfAssessments();
-    console.log(numberOfAssessmentsAdded);
+    // console.log(numberOfAssessmentsAdded);
     let numOfAssessments = Number(modulesList[`${moduleName}`]["numOfAssessments"]);
-    console.log(numOfAssessments);
+    // console.log(numOfAssessments);
 
     //Check if the number of assessments already added is less than the total number of assessments
     if(numberOfAssessmentsAdded < numOfAssessments){
@@ -672,7 +663,7 @@ let saveAssessment = function() {
 
         //append new assessment to the dropdown
         modulesDropdown.appendChild(newElement);
-        console.log(modulesList);
+        // console.log(modulesList);
         numberOfAssessmentsTaken++;
         closeAssessmentPopup();
     }
@@ -685,16 +676,15 @@ let saveAssessment = function() {
     document.querySelector("#score").value = "";
     document.querySelector("#total-marks").value = "";
     document.querySelector("#worth").value = "";
-
 }
 
 //this funtion deletes the clicked assessment from the list of assessments for the specifc module
 let deleteAssessment = function(element){
     //Get the name of the class, the target dropdown & id of the element to delete
     let moduleName = element.classList[3];
-    console.log(element);
-    console.log(moduleName);
-    console.log("This" + element.classList[5]);
+    // console.log(element);
+    // console.log(moduleName);
+    // console.log("This" + element.classList[5]);
 
     let assessementToDelete = element.classList[4];
 
@@ -714,16 +704,18 @@ let deleteAssessment = function(element){
         modulesDropdown.removeChild(node);
 
     }catch(e){
-        console.log("Error: Cannot remove assessment!");
+        alert("Cannot remove assessment");
+        // console.log("Error: Cannot remove assessment!");
     } 
 }
+
 
 //This funtion will provide information to the user about the module.
 let moduleDetails = function(element){
     let moduleName = element.classList[2];
     let moduleDetailsInfo = modulesList[`${moduleName}`].moduleDetails();
-    console.log(moduleDetailsInfo);
-    console.log(modulesList);
+    // console.log(moduleDetailsInfo);
+    // console.log(modulesList);
     return moduleDetailsInfo;
 }
 
@@ -739,7 +731,7 @@ let moduleFeedback = function(element){
     let moduleName = element.classList[2];
     let moduleFeedbackInfo = modulesList[`${moduleName}`].feedback();
     
-    console.log("This " + moduleFeedbackInfo);
+    // console.log("This " + moduleFeedbackInfo);
 
 
     //show the module feedback popup
@@ -753,7 +745,6 @@ let moduleFeedback = function(element){
     targetFeedback.innerHTML = moduleFeedbackInfo;
     // target.appendChild(feedback);
     // feedback = "";
-
 }
 
 //this function, minimises the module dropdown list
