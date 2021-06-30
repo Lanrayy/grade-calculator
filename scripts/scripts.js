@@ -657,7 +657,7 @@ let saveAssessment = function() {
         deleteButton.textContent = "DELETE ASSESSMENT";
 
         //Create the node with the assesment information
-        let details = ` [   Your got:  ${score} out of ${totalMarks} | ${modulesList[`${moduleName}`]["assessments"][assessmentName]["percent"]}%]`;
+        let details = ` [   You got:  ${score} out of ${totalMarks} | ${modulesList[`${moduleName}`]["assessments"][assessmentName]["percent"]}%]`;
         let asssessmentDetails = document.createTextNode(details);
 
         //Append the text to the new element 
