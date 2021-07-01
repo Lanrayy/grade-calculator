@@ -61,9 +61,6 @@ input:focus {
 .dashboard-header {
   /* border: 1px solid red; */
   height: 160px;
-  /* background-color: aquamarine; */
-  /* background-image: linea-gradientrgba(107, 114, 204, 0.192),
-    url("background.png"); */
 
   background-image: linear-gradient(
       rgba(84, 16, 90, 0.644),
@@ -91,7 +88,6 @@ input:focus {
 
 .dashboard-container-header {
   /* border: 1px solid black; */
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -321,8 +317,39 @@ input:focus {
 }
 
 /* MOBILE STYLES */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 400px) {
   body {
-    display: none;
+    width: 100%;
+  }
+
+  .button {
+    width: 100px;
+    height: 20px;
+  }
+
+  .main-container {
+    border: 2px solid red;
+  }
+
+  .dashboard-header {
+    height: 90px;
+    align-items: center;
+    justify-content: space-around;
+    border: 2px solid blue;
+    padding-left: 10px;
+  }
+
+  .main-title {
+    font-size: 22px;
+    padding-left: 0px;
+  }
+
+  .logo {
+    width: 80px;
+    margin-right: 0px;
+  }
+
+  .welcome-message {
+    font-size: 20px;
   }
 }
