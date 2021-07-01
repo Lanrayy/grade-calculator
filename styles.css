@@ -319,3 +319,10 @@ input:focus {
 .module-feedback-container {
   margin-top: 15px;
 }
+
+/* MOBILE STYLES */
+@media only screen and (max-width: 600px) {
+  body {
+    display: none;
+  }
+}
