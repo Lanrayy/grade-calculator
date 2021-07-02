@@ -61,9 +61,6 @@ input:focus {
 .dashboard-header {
   /* border: 1px solid red; */
   height: 160px;
-  /* background-color: aquamarine; */
-  /* background-image: linea-gradientrgba(107, 114, 204, 0.192),
-    url("background.png"); */
 
   background-image: linear-gradient(
       rgba(84, 16, 90, 0.644),
@@ -91,7 +88,6 @@ input:focus {
 
 .dashboard-container-header {
   /* border: 1px solid black; */
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -134,7 +130,7 @@ input:focus {
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .module-details {
@@ -187,6 +183,16 @@ input:focus {
 }
 
 /* ADD MODULE POPUP  */
+.add-module-popup-container {
+  z-index: 2;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
 
 .add-module-popup {
   width: 450px;
@@ -197,12 +203,11 @@ input:focus {
   padding: 15px;
 
   position: absolute;
-  left: 36%;
-  top: 25%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  z-index: 3;
 }
 
 .popup-title {
@@ -213,14 +218,16 @@ input:focus {
 }
 
 .add-module-popup-overlay {
-  border: 1px solid red;
+  border: 3px solid green;
   position: absolute;
   background-color: black;
-  width: 1440px;
+  width: 100%;
   min-height: 100%;
-  height: fit-content;
+  height: 100%;
+  /* height: fit-content; */
   display: flex;
   opacity: 0.3;
+  z-index: 2;
 }
 
 .popup-input-container {
@@ -250,6 +257,18 @@ input:focus {
 }
 
 /* ADD ASSESSEMENT POPUP */
+.add-assessment-popup-container {
+  z-index: 2;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid green;
+}
+
 .add-assessment-popup {
   width: 450px;
   height: 300px;
@@ -259,26 +278,38 @@ input:focus {
   padding: 15px;
 
   position: absolute;
-  left: 36%;
-  top: 25%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  z-index: 3;
 }
 
 .add-assessment-popup-overlay {
   border: 1px solid red;
   position: absolute;
   background-color: black;
-  width: 1440px;
+  width: 100%;
   min-height: 100%;
   height: fit-content;
   display: flex;
   opacity: 0.3;
+  z-index: 2;
 }
 
 /* MODULE FEEDBACK POPUP */
+.module-feedback-popup-container {
+  z-index: 2;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid green;
+}
+
 .module-feedback-popup {
   width: 630px;
   min-height: 330px;
@@ -288,8 +319,6 @@ input:focus {
   padding: 15px;
 
   position: absolute;
-  left: 28%;
-  top: 25%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -318,4 +347,143 @@ input:focus {
 
 .module-feedback-container {
   margin-top: 15px;
+}
+
+/* MOBILE STYLES */
+@media only screen and (max-width: 400px) {
+  body {
+    width: 100%;
+  }
+
+  .button {
+    width: 90px;
+    height: 20px;
+    font-size: 8px;
+  }
+
+  label {
+    font-size: 11px;
+  }
+
+  input {
+    font-size: 10px;
+    height: 20px;
+    border-radius: 5px;
+  }
+
+  .main-container {
+    border: 2px solid red;
+  }
+
+  .dashboard-header {
+    height: 90px;
+    align-items: center;
+    justify-content: space-around;
+    padding-left: 10px;
+  }
+
+  .main-title {
+    font-size: 22px;
+    padding-left: 0px;
+  }
+
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .logo {
+    width: 80px;
+    margin-right: 0px;
+  }
+
+  .welcome-message {
+    font-size: 20px;
+  }
+
+  .module {
+    min-height: 50px;
+  }
+
+  .module-details {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+    height: 50px;
+  }
+
+  .module-name {
+    font-size: 14px;
+  }
+
+  .module-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 150px;
+  }
+
+  .module-buttons .button {
+    width: 70px;
+    margin: 1px;
+    font-size: 6px;
+  }
+
+  .assessment {
+    height: 30px;
+    padding: 0px 10px;
+  }
+
+  .assessment button {
+    font-size: 6px;
+    width: 60px;
+  }
+
+  .assessment p {
+    font-size: 10px;
+  }
+
+  .popup-title {
+    font-size: 10px;
+    margin-bottom: 5px;
+  }
+
+  /* ADD MODULE POPUP */
+  .add-module-popup {
+    width: 320px;
+    height: 205px;
+  }
+
+  .popup-input-container {
+    height: 26px;
+  }
+
+  .popup-buttons-container {
+    bottom: 10px;
+    right: 5px;
+  }
+
+  /* ADD ASSESSMENT POPUP */
+  .add-assessment-popup {
+    width: 320px;
+    height: 205px;
+  }
+
+  .popup-input-container {
+    height: 26px;
+  }
+
+  /* MODULE FEEDBACK POPUP */
+  .module-feedback-popup {
+    width: 380px;
+    height: 205px;
+  }
+
+  .module-feedback-popup-container {
+    font-size: 12px;
+  }
+
+  .hide {
+    display: none;
+  }
 }

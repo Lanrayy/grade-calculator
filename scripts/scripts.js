@@ -443,6 +443,7 @@ let addModuleButton = document.querySelector(".add-module-button");
 addModuleButton.addEventListener("click", function(){
     let popup = document.querySelector(".add-module-popup-container");
     popup.classList.remove("hide");
+    popup.style.display = "flex";
 
 });
 
@@ -490,17 +491,20 @@ let setModuleDropdownClassName = function(node, nameofModule){
 //Add Module Popup Cancel button
 let closeModulePopup = function(){
     let popup = document.querySelector(".add-module-popup-container");
-    popup.classList.add("hide");
+    popup.style.display = "none";
+    // popup.classList.add("hide");
 };
 
 let closeAssessmentPopup = function(){
     let popup = document.querySelector(".add-assessment-popup-container");
-    popup.classList.add("hide");
+    popup.style.display = "none";
+    // popup.classList.add("hide");
 };
 
 let closeModuleFeedbackPopup = function(){
     let popup = document.querySelector(".module-feedback-popup-container");
-    popup.classList.add("hide");
+    popup.style.display = "none";
+    // popup.classList.add("hide");
 };
 
 let sampleModule;
@@ -527,8 +531,7 @@ let saveModule = function(){
     // sampleModule = new modules(moduleName, moduleCode, numOfAssessments, credits);
 
     //Close the popup
-    let popup = document.querySelector(".add-module-popup-container");
-    popup.classList.add("hide");
+    closeModulePopup();
 
     //Clone node and Add the new nodeto the list
     let newModule = node.cloneNode(true);
@@ -586,7 +589,8 @@ let addAssessment = function(element){
     assessmentNameInput.textContent = `coursework_${numberOfAssessmentsTaken}"`;
 
     let popup = document.querySelector(".add-assessment-popup-container");
-    popup.classList.remove("hide");
+    // popup.classList.remove("hide");
+    popup.style.display = "flex";
 
     let target = document.querySelector(".target-module");
     target.textContent = moduleName;
@@ -643,23 +647,29 @@ let saveAssessment = function() {
 
         //Create a button and add it to the element
         let newElement = document.createElement("div");
-        let text = document.createTextNode(`${userAssessmentName}( ${worth}% ): `);
+        // let text = document.createTextNode(`${userAssessmentName}( ${worth}% ): `);
+        let text = document.createElement("p");
+        let details = `${userAssessmentName}( ${worth}% ): `;
+        text.textContent = details;
         let deleteButton = document.createElement("button");
         deleteButton.classList.add("button", "cancel-button", `${moduleName}-delete-assessment-button`, `${moduleName}`, `${moduleName}-${assessmentName}`, `${assessmentName}`);
         deleteButton.setAttribute("onclick", "deleteAssessment(this)");
         deleteButton.textContent = "DELETE ASSESSMENT";
 
         //Create the node with the assesment information
-        let details = ` [   You got:  ${score} out of ${totalMarks} | ${modulesList[`${moduleName}`]["assessments"][assessmentName]["percent"]}%]`;
-        let asssessmentDetails = document.createTextNode(details);
+        details += ` [   You got:  ${score} out of ${totalMarks} | ${modulesList[`${moduleName}`]["assessments"][assessmentName]["percent"]}%]`;
+        let assessmentDetails = document.createElement("p");
+        assessmentDetails.textContent = details;
+        // let asssessmentDetails = document.createTextNode(details);
 
         //Append the text to the new element 
-        newElement.appendChild(text);
-        newElement.appendChild(asssessmentDetails);
+        // newElement.appendChild(text);
+        newElement.appendChild(assessmentDetails);
         newElement.appendChild(deleteButton);
         newElement.setAttribute("id", `${moduleName}-${assessmentName}`);
         newElement.setAttribute("class", "assessment" );
         newElement.classList.add(`${moduleName}-assessment`);
+
 
         //append new assessment to the dropdown
         modulesDropdown.appendChild(newElement);
@@ -737,6 +747,7 @@ let moduleFeedback = function(element){
     //show the module feedback popup
     let popup = document.querySelector(".module-feedback-popup-container");
     popup.classList.remove("hide");
+    popup.style.display = "flex";
 
     //put feedback into popup
     // let feedback = document.createTextNode(moduleFeedbackDetails);
