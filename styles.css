@@ -183,6 +183,16 @@ input:focus {
 }
 
 /* ADD MODULE POPUP  */
+.add-module-popup-container {
+  z-index: 2;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
 
 .add-module-popup {
   width: 450px;
@@ -193,12 +203,11 @@ input:focus {
   padding: 15px;
 
   position: absolute;
-  left: 36%;
-  top: 25%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  z-index: 3;
 }
 
 .popup-title {
@@ -209,14 +218,16 @@ input:focus {
 }
 
 .add-module-popup-overlay {
-  border: 1px solid red;
+  border: 3px solid green;
   position: absolute;
   background-color: black;
-  width: 1440px;
+  width: 100%;
   min-height: 100%;
-  height: fit-content;
+  height: 100%;
+  /* height: fit-content; */
   display: flex;
   opacity: 0.3;
+  z-index: 2;
 }
 
 .popup-input-container {
@@ -246,6 +257,18 @@ input:focus {
 }
 
 /* ADD ASSESSEMENT POPUP */
+.add-assessment-popup-container {
+  z-index: 2;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid green;
+}
+
 .add-assessment-popup {
   width: 450px;
   height: 300px;
@@ -255,23 +278,23 @@ input:focus {
   padding: 15px;
 
   position: absolute;
-  left: 36%;
-  top: 25%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  z-index: 3;
 }
 
 .add-assessment-popup-overlay {
   border: 1px solid red;
   position: absolute;
   background-color: black;
-  width: 1440px;
+  width: 100%;
   min-height: 100%;
   height: fit-content;
   display: flex;
   opacity: 0.3;
+  z-index: 2;
 }
 
 /* MODULE FEEDBACK POPUP */
@@ -328,6 +351,16 @@ input:focus {
     font-size: 8px;
   }
 
+  label {
+    font-size: 11px;
+  }
+
+  input {
+    font-size: 10px;
+    height: 20px;
+    border-radius: 5px;
+  }
+
   .main-container {
     border: 2px solid red;
   }
@@ -357,7 +390,42 @@ input:focus {
     font-size: 20px;
   }
 
-  .modules-container {
+  .module {
     border: 2px solid blue;
+  }
+
+  .popup-title {
+    font-size: 10px;
+    margin-bottom: 5px;
+  }
+
+  /* ADD MODULE POPUP */
+  .add-module-popup {
+    width: 320px;
+    height: 205px;
+  }
+
+  .popup-input-container {
+    height: 26px;
+  }
+
+  .popup-buttons-container {
+    bottom: 10px;
+    right: 5px;
+  }
+
+  /* ADD ASSESSMENT POPUP */
+
+  .add-assessment-popup {
+    width: 320px;
+    height: 205px;
+  }
+
+  .popup-input-container {
+    height: 26px;
+  }
+
+  .hide {
+    display: none;
   }
 }

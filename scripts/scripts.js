@@ -443,6 +443,7 @@ let addModuleButton = document.querySelector(".add-module-button");
 addModuleButton.addEventListener("click", function(){
     let popup = document.querySelector(".add-module-popup-container");
     popup.classList.remove("hide");
+    popup.style.display = "flex";
 
 });
 
@@ -490,17 +491,20 @@ let setModuleDropdownClassName = function(node, nameofModule){
 //Add Module Popup Cancel button
 let closeModulePopup = function(){
     let popup = document.querySelector(".add-module-popup-container");
+    popup.style.display = "none";
     popup.classList.add("hide");
 };
 
 let closeAssessmentPopup = function(){
     let popup = document.querySelector(".add-assessment-popup-container");
-    popup.classList.add("hide");
+    popup.style.display = "none";
+    // popup.classList.add("hide");
 };
 
 let closeModuleFeedbackPopup = function(){
     let popup = document.querySelector(".module-feedback-popup-container");
-    popup.classList.add("hide");
+
+    // popup.classList.add("hide");
 };
 
 let sampleModule;
@@ -587,6 +591,7 @@ let addAssessment = function(element){
 
     let popup = document.querySelector(".add-assessment-popup-container");
     popup.classList.remove("hide");
+    popup.style.display = "flex";
 
     let target = document.querySelector(".target-module");
     target.textContent = moduleName;
