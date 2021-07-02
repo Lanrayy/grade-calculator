@@ -490,12 +490,32 @@ input:focus {
   .main-title {
     font-size: 25px;
     padding-left: 10px;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
+  }
+
+  .button {
+    width: 90px;
+    height: 20px;
+    font-size: 8px;
+  }
+
+  label {
+    font-size: 11px;
+  }
+
+  input {
+    font-size: 10px;
+    height: 20px;
+    border-radius: 5px;
   }
 
   .logo {
     width: 100px;
     margin-right: 0px;
+  }
+
+  .welcome-message {
+    font-size: 24px;
   }
 
   .dashboard-header {
@@ -505,10 +525,43 @@ input:focus {
     /* padding-left: 5px; */
   }
 
+  .module-name {
+    font-size: 18px;
+  }
+
+  .module-buttons {
+    /* border: 3px solid blue; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-width: 200px;
+    width: 350px;
+  }
+
+  .module-buttons .button {
+    width: 90px;
+    margin: 1px;
+    font-size: 7px;
+  }
+
+  .assessment {
+    height: 30px;
+    padding: 0px 10px;
+  }
+
+  .assessment button {
+    font-size: 6px;
+    width: 60px;
+  }
+
+  .assessment p {
+    font-size: 11px;
+  }
+
   /* MODULE FEEDBACK POPUP */
   .module-feedback-popup {
     width: 380px;
-    height: 205px;
   }
 
   .module-feedback-popup-container {
@@ -522,9 +575,29 @@ input:focus {
     padding-left: 30px;
   }
 
+  .button {
+    width: 90px;
+    height: 20px;
+    font-size: 8px;
+  }
+
+  label {
+    font-size: 11px;
+  }
+
+  input {
+    font-size: 10px;
+    height: 20px;
+    border-radius: 5px;
+  }
+
   .logo {
     width: 100px;
     margin-right: 0px;
+  }
+
+  .module-name {
+    font-size: 24px;
   }
 
   .dashboard-header {
@@ -534,10 +607,39 @@ input:focus {
     /* padding-left: 5px; */
   }
 
+  .module-buttons {
+    /* border: 3px solid green; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 250px;
+  }
+
+  .module-buttons .button {
+    width: 100px;
+    height: 25px;
+    margin: 1px;
+    font-size: 8px;
+  }
+
+  .assessment {
+    height: 40px;
+    padding: 0px 10px;
+  }
+
+  .assessment button {
+    font-size: 7px;
+    width: 100px;
+  }
+
+  .assessment p {
+    font-size: 14px;
+  }
+
   /* MODULE FEEDBACK POPUP */
   .module-feedback-popup {
     width: 380px;
-    height: 205px;
   }
 
   .module-feedback-popup-container {
