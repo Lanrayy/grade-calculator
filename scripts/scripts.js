@@ -492,7 +492,7 @@ let setModuleDropdownClassName = function(node, nameofModule){
 let closeModulePopup = function(){
     let popup = document.querySelector(".add-module-popup-container");
     popup.style.display = "none";
-    popup.classList.add("hide");
+    // popup.classList.add("hide");
 };
 
 let closeAssessmentPopup = function(){
@@ -504,7 +504,6 @@ let closeAssessmentPopup = function(){
 let closeModuleFeedbackPopup = function(){
     let popup = document.querySelector(".module-feedback-popup-container");
     popup.style.display = "none";
-
     // popup.classList.add("hide");
 };
 
@@ -532,9 +531,7 @@ let saveModule = function(){
     // sampleModule = new modules(moduleName, moduleCode, numOfAssessments, credits);
 
     //Close the popup
-    let popup = document.querySelector(".add-module-popup-container");
-    popup.classList.add("hide");
-    popup.style.display = "none";
+    closeModulePopup();
 
     //Clone node and Add the new nodeto the list
     let newModule = node.cloneNode(true);
@@ -592,7 +589,7 @@ let addAssessment = function(element){
     assessmentNameInput.textContent = `coursework_${numberOfAssessmentsTaken}"`;
 
     let popup = document.querySelector(".add-assessment-popup-container");
-    popup.classList.remove("hide");
+    // popup.classList.remove("hide");
     popup.style.display = "flex";
 
     let target = document.querySelector(".target-module");
@@ -744,6 +741,7 @@ let moduleFeedback = function(element){
     //show the module feedback popup
     let popup = document.querySelector(".module-feedback-popup-container");
     popup.classList.remove("hide");
+    popup.style.display = "flex";
 
     //put feedback into popup
     // let feedback = document.createTextNode(moduleFeedbackDetails);
