@@ -484,3 +484,43 @@ input:focus {
     display: none;
   }
 }
+
+/* TABLET STYLES */
+@media only screen and (min-width: 401px) and (max-width: 600px) {
+  .main-title {
+    font-size: 25px;
+    padding-left: 10px;
+    border: 1px solid blue;
+  }
+
+  .logo {
+    width: 100px;
+    margin-right: 0px;
+  }
+
+  .dashboard-header {
+    height: 100px;
+    align-items: center;
+    justify-content: space-around;
+    /* padding-left: 5px; */
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 800px) {
+  .main-title {
+    font-size: 40px;
+    padding-left: 30px;
+  }
+
+  .logo {
+    width: 100px;
+    margin-right: 0px;
+  }
+
+  .dashboard-header {
+    height: 110px;
+    align-items: center;
+    justify-content: space-around;
+    /* padding-left: 5px; */
+  }
+}
