@@ -563,7 +563,6 @@ let saveModule = function(){
     document.querySelector(".logo").scrollIntoView();
 }
 
-
 //Delete the selected module that was clicked on
 let deleteModule = function(element){
     //confirm if user wants to delete module

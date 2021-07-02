@@ -493,6 +493,11 @@ input:focus {
     /* border: 1px solid blue; */
   }
 
+  body {
+    width: 100%;
+    height: 100%;
+  }
+
   .button {
     width: 90px;
     height: 20px;
@@ -573,6 +578,11 @@ input:focus {
   .main-title {
     font-size: 40px;
     padding-left: 30px;
+  }
+
+  body {
+    width: 100%;
+    height: 100%;
   }
 
   .button {
