@@ -130,7 +130,7 @@ input:focus {
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .module-details {
@@ -401,7 +401,46 @@ input:focus {
   }
 
   .module {
-    border: 2px solid blue;
+    min-height: 50px;
+  }
+
+  .module-details {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+    height: 50px;
+  }
+
+  .module-name {
+    font-size: 14px;
+  }
+
+  .module-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 150px;
+  }
+
+  .module-buttons .button {
+    width: 70px;
+    margin: 1px;
+    font-size: 6px;
+  }
+
+  .assessment {
+    height: 30px;
+    padding: 0px 10px;
+  }
+
+  .assessment button {
+    font-size: 6px;
+    width: 60px;
+  }
+
+  .assessment p {
+    font-size: 10px;
   }
 
   .popup-title {

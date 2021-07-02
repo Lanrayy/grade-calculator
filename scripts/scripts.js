@@ -647,23 +647,29 @@ let saveAssessment = function() {
 
         //Create a button and add it to the element
         let newElement = document.createElement("div");
-        let text = document.createTextNode(`${userAssessmentName}( ${worth}% ): `);
+        // let text = document.createTextNode(`${userAssessmentName}( ${worth}% ): `);
+        let text = document.createElement("p");
+        let details = `${userAssessmentName}( ${worth}% ): `;
+        text.textContent = details;
         let deleteButton = document.createElement("button");
         deleteButton.classList.add("button", "cancel-button", `${moduleName}-delete-assessment-button`, `${moduleName}`, `${moduleName}-${assessmentName}`, `${assessmentName}`);
         deleteButton.setAttribute("onclick", "deleteAssessment(this)");
         deleteButton.textContent = "DELETE ASSESSMENT";
 
         //Create the node with the assesment information
-        let details = ` [   You got:  ${score} out of ${totalMarks} | ${modulesList[`${moduleName}`]["assessments"][assessmentName]["percent"]}%]`;
-        let asssessmentDetails = document.createTextNode(details);
+        details += ` [   You got:  ${score} out of ${totalMarks} | ${modulesList[`${moduleName}`]["assessments"][assessmentName]["percent"]}%]`;
+        let assessmentDetails = document.createElement("p");
+        assessmentDetails.textContent = details;
+        // let asssessmentDetails = document.createTextNode(details);
 
         //Append the text to the new element 
-        newElement.appendChild(text);
-        newElement.appendChild(asssessmentDetails);
+        // newElement.appendChild(text);
+        newElement.appendChild(assessmentDetails);
         newElement.appendChild(deleteButton);
         newElement.setAttribute("id", `${moduleName}-${assessmentName}`);
         newElement.setAttribute("class", "assessment" );
         newElement.classList.add(`${moduleName}-assessment`);
+
 
         //append new assessment to the dropdown
         modulesDropdown.appendChild(newElement);
