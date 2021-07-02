@@ -504,9 +504,19 @@ input:focus {
     justify-content: space-around;
     /* padding-left: 5px; */
   }
+
+  /* MODULE FEEDBACK POPUP */
+  .module-feedback-popup {
+    width: 380px;
+    height: 205px;
+  }
+
+  .module-feedback-popup-container {
+    font-size: 12px;
+  }
 }
 
-@media only screen and (min-width: 600px) and (max-width: 800px) {
+@media only screen and (min-width: 600px) and (max-width: 888px) {
   .main-title {
     font-size: 40px;
     padding-left: 30px;
@@ -522,5 +532,15 @@ input:focus {
     align-items: center;
     justify-content: space-around;
     /* padding-left: 5px; */
+  }
+
+  /* MODULE FEEDBACK POPUP */
+  .module-feedback-popup {
+    width: 380px;
+    height: 205px;
+  }
+
+  .module-feedback-popup-container {
+    font-size: 12px;
   }
 }
