@@ -559,6 +559,8 @@ let saveModule = function(){
     document.querySelector("#module-code").value = ""
     document.querySelector("#num-of-assessments").value = "";
     document.querySelector("#credits").value = "";
+
+    document.querySelector(".logo").scrollIntoView();
 }
 
 
