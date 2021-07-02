@@ -218,7 +218,7 @@ input:focus {
 }
 
 .add-module-popup-overlay {
-  border: 3px solid green;
+  /* border: 3px solid green; */
   position: absolute;
   background-color: black;
   width: 100%;
@@ -266,7 +266,7 @@ input:focus {
   display: none;
   align-items: center;
   justify-content: center;
-  border: 2px solid green;
+  /* border: 2px solid green; */
 }
 
 .add-assessment-popup {
@@ -286,7 +286,7 @@ input:focus {
 }
 
 .add-assessment-popup-overlay {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   position: absolute;
   background-color: black;
   width: 100%;
@@ -307,7 +307,7 @@ input:focus {
   display: none;
   align-items: center;
   justify-content: center;
-  border: 2px solid green;
+  /* border: 2px solid green; */
 }
 
 .module-feedback-popup {
@@ -326,10 +326,10 @@ input:focus {
 }
 
 .module-feedback-overlay {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   position: absolute;
   background-color: black;
-  width: 1440px;
+  width: 100%;
   min-height: 100%;
   height: fit-content;
   display: flex;
