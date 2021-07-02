@@ -323,8 +323,9 @@ input:focus {
   }
 
   .button {
-    width: 100px;
+    width: 90px;
     height: 20px;
+    font-size: 8px;
   }
 
   .main-container {
@@ -335,13 +336,16 @@ input:focus {
     height: 90px;
     align-items: center;
     justify-content: space-around;
-    border: 2px solid blue;
     padding-left: 10px;
   }
 
   .main-title {
     font-size: 22px;
     padding-left: 0px;
+  }
+
+  .dashboard-container {
+    padding: 20px;
   }
 
   .logo {
@@ -351,5 +355,9 @@ input:focus {
 
   .welcome-message {
     font-size: 20px;
+  }
+
+  .modules-container {
+    border: 2px solid blue;
   }
 }
