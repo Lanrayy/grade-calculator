@@ -503,6 +503,7 @@ let closeAssessmentPopup = function(){
 
 let closeModuleFeedbackPopup = function(){
     let popup = document.querySelector(".module-feedback-popup-container");
+    popup.style.display = "none";
 
     // popup.classList.add("hide");
 };
@@ -533,6 +534,7 @@ let saveModule = function(){
     //Close the popup
     let popup = document.querySelector(".add-module-popup-container");
     popup.classList.add("hide");
+    popup.style.display = "none";
 
     //Clone node and Add the new nodeto the list
     let newModule = node.cloneNode(true);
