@@ -1,6 +1,3 @@
-###Languages used
-This project was coded in entirely in HTML5, CSS3 & Vanilla Javascript.
-
 # Grade Calculator App
 
 ## Table of contents
