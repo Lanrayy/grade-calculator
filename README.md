@@ -105,7 +105,7 @@ Advantages:
 - Additionally, When an assesment is deleted it did not affect the other modules.
 - Using a for in loop on the object, meant that users can freely delete modules/assessment without the order playing a part or affecting the results.
 
-#### 4. Module Feedback
+#### 3. Module Feedback
 
 Using JavaScript, I was able to create a working feedback system. When a user clicks for feedback on the module, the details of the corresponding object is displayed to the user in a popup.
 
