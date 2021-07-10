@@ -40,8 +40,13 @@ Users should be able to:
 
 ### Screenshot
 
+Homepage:
 ![](images/grade-calculator-homepage.png)
+
+Added Modules:
 ![](images/grade-calculator-module.png)
+
+Module Feedback:
 ![](images/grade-calculator-feedback.png)
 
 ## My process
