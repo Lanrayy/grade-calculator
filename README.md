@@ -41,6 +41,8 @@ Users should be able to:
 ### Screenshot
 
 ![](images/grade-calculator-homepage.png)
+![](images/grade-calculator-module.png)
+![](images/grade-calculator-feedback.png)
 
 ## My process
 
